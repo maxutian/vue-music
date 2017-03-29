@@ -1,23 +1,31 @@
 <template>
 	<div id="header-container">
+
 		<md-toolbar>
+
 		  <md-button class="md-icon-button" @click.native="toggleLeftSidenav">
 		    <md-icon>menu</md-icon>
 		    <md-tooltip md-direction="bottom">歌曲列表</md-tooltip>
 		  </md-button>
+
 		  <h2 class="md-title">Vue Music</h2>
+
 		  <md-input-container md-inline id="v-header-inputContainer">
 		    <md-input placeholder="输入歌曲名以搜索" id="v-header-input"></md-input>
 		  </md-input-container>
+
 		  <md-button class="md-icon-button">
 		  	<md-icon>search</md-icon>
 		  	<md-tooltip md-direction="bottom">搜索歌曲</md-tooltip>
 		  </md-button>
+
 		  <span style="flex: 1"></span>
+
 		  <md-button class="md-icon-button">
 		  	<md-icon>home</md-icon>
 		  	<md-tooltip md-direction="left">返回博客主页</md-tooltip>
 		  </md-button>
+		  
 		</md-toolbar>
 
 		<md-sidenav class="md-left" ref="sidenav">
