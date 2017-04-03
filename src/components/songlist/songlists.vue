@@ -29,6 +29,6 @@ export default {
 		justify-content: space-around;
 		width: 50%;
 		margin: 0 auto;
-		margin-top: 30px;
+		margin-top: 10px;
 	}
 </style>
