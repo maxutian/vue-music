@@ -1,5 +1,5 @@
 <template>
-	<md-card id="v-songlist-hover" class="v-songlist-ele">
+	<md-card id="v-songlist-hover" class="v-songlist-ele" @click.native="test">
 		<md-card-media-cover md-solid>
 	    <md-card-media md-ratio="1:1">
 	      <img src="../../assets/album.jpg" alt="Skyscraper">
@@ -17,7 +17,13 @@
 </template>
 
 <script>
-	
+export default {
+  methods: {
+    test: function () {
+      alert('test');
+    }
+  }
+};
 </script>
 
 <style>
@@ -33,10 +39,13 @@
 	.v-songlist-ele{
 		width: 30%;
 		margin-bottom: 3%;
+		margin-right: 3%;
 	}
 	@media(max-width: 1000px){
 		.v-songlist-ele{
 			width: 45%;
+			margin-bottom: 5%;
+			margin-right: 5%;
 		}
 	}
 </style>

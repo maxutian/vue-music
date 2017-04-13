@@ -26,7 +26,7 @@ export default {
 	#v-singerlists-body{
 		display: flex;
 		flex-flow: row wrap;
-		justify-content: space-around;
+		justify-content: flex-start;
 		width: 50%;
 		margin: 0 auto;
 		margin-top: 10px;
