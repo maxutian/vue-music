@@ -43,7 +43,7 @@
 	    </md-toolbar>
 	    <md-list>
       	<md-subheader>Song List</md-subheader>
-		    <md-list-item @click.native="$refs.sidenav.toggle()" class="md-primary">
+		    <md-list-item @click.native="$refs.sidenav.toggle();" class="md-primary">
 		    	<md-icon class="v-header-sidenav-icon">play_arrow</md-icon><span>song1</span>
 		    	<md-divider class="md-inset"></md-divider>
 		    </md-list-item>
@@ -61,13 +61,13 @@
 </template>
 
 <script>
-	export default {
+export default {
   methods: {
-	    toggleLeftSidenav () {
-	      this.$refs.sidenav.toggle();
-	    }
-	  }
-	};
+    toggleLeftSidenav () {
+      this.$refs.sidenav.toggle();
+    }
+  }
+};
 </script>
 
 <style>
