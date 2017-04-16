@@ -81,8 +81,8 @@ export default {
         } else if (barleft > scroll.offsetWidth - bar.offsetWidth) {
           barleft = scroll.offsetWidth - bar.offsetWidth;
         }
-        mask.style.width = barleft + 'px';
-        that.style.left = barleft + 'px';
+        mask.style.width = (barleft / bgWidth.offsetWidth) * 100 + '%';
+        that.style.left = (barleft / bgWidth.offsetWidth) * 100 + '%';
         window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty();
       };
     };
