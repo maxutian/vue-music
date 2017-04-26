@@ -16,7 +16,7 @@
       </button>
     </div>
     <div id="v-player-duration">
-      <div id="pointer">
+      <div id="pointer" @mousedown="Drag">
         <div id="pointer-s"></div>
       </div>
       <div id="duration-bg">
@@ -40,6 +40,7 @@
 
 <script>
 export default {
+  name: 'player',
   methods: {
     changeIcon () {
       var ppi = document.getElementById('play-pause-icon');
@@ -62,33 +63,36 @@ export default {
       } else {
         voice.innerHTML = 'volume_up';
       }
+    },
+    Drag () {
+      var scroll = document.getElementById('v-player-duration');
+      var bar = document.getElementById('pointer');
+      var mask = document.getElementById('progress-bar');
+      var bgWidth = document.getElementById('duration-bg');
+      var barleft = 0;
+      bar.onmousedown = function () {
+        var event = event || window.event;
+        var leftVal = event.clientX - this.offsetLeft;
+        var that = this;
+        document.onmousemove = function () {
+          var event = event || window.event;
+          barleft = event.clientX - leftVal;
+          if (barleft < 0) {
+            barleft = 0;
+          } else if (barleft > scroll.offsetWidth - bar.offsetWidth) {
+            barleft = scroll.offsetWidth - bar.offsetWidth;
+          }
+          mask.style.width = (barleft / bgWidth.offsetWidth) * 100 + '%';
+          that.style.left = (barleft / bgWidth.offsetWidth) * 100 + '%';
+          window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty();
+        };
+        document.onmouseup = function () {
+          document.onmousemove = null;
+        };
+      };
     }
   },
   mouted: function () {
-    var scroll = document.getElementById('v-player-duration');
-    var bar = document.getElementById('pointer');
-    var mask = document.getElementById('progress-bar');
-    var barleft = 0;
-    bar.onmousedown = function () {
-      var event = event || window.event;
-      var leftVal = event.clientX - this.offsetLeft;
-      var that = this;
-      document.onmousemove = function () {
-        var event = event || window.event;
-        barleft = event.clientX - leftVal;
-        if (barleft < 0) {
-          barleft = 0;
-        } else if (barleft > scroll.offsetWidth - bar.offsetWidth) {
-          barleft = scroll.offsetWidth - bar.offsetWidth;
-        }
-        mask.style.width = (barleft / bgWidth.offsetWidth) * 100 + '%';
-        that.style.left = (barleft / bgWidth.offsetWidth) * 100 + '%';
-        window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty();
-      };
-    };
-    document.onmouseup = function () {
-      document.onmousemove = null;
-    };
   }
 };
 </script>
