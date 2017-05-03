@@ -1,6 +1,6 @@
 <template>
   <div id="v-player-container">
-    <audio ref="player" @canplay="musicTime" id="v-player-music">
+    <audio ref="player" @canplay="musicTime" @ended="ended" id="v-player-music">
       <source src="http://m2.music.126.net/XVILMKj3bTnirqOXc1x5xA==/1318314441705656.mp3">
     </audio>
     <div id="v-player-control">
@@ -8,9 +8,9 @@
         <i class="material-icons" id="previous">skip_previous</i>
         <md-tooltip md-direction="top">上一首</md-tooltip>
       </button>
-      <button @click="playMusic" class="play-pause">
-        <i class="material-icons" id="play-pause-icon">play_circle_outline</i>
-        <md-tooltip md-direction="top" id="play-pause-text">播放</md-tooltip>
+      <button @click="playControl" class="play-pause">
+        <i class="material-icons" id="play-pause-icon">{{iconText}}</i>
+        <md-tooltip md-direction="top" id="play-pause-text">{{playText}}</md-tooltip>
       </button>
       <button @click="" class="v-player-next">
         <i class="material-icons" id="next">skip_next</i>
@@ -18,25 +18,26 @@
       </button>
     </div>
     <div id="progress">
-      <vue-slider v-bind="duration" style="margin-left: 20px;"></vue-slider>
+      <vue-slider v-bind="duration" style="margin-left: 20px;" v-model="progress"></vue-slider>
     </div>
     <div id="time">
-      <span>{{currentTimer}}</span>
+      <span>{{current}}</span>
       <span>/</span>
-      <span>{{endTime}}</span>
+      <span>{{end}}</span>
     </div>
     <button @click="volumeControl" class="v-player-voice" style="margin-left: 1%;">
-      <i class="material-icons" id="voice">volume_up</i>
+      <i class="material-icons" id="voice">{{viconText}}</i>
       <md-tooltip md-direction="top">音量/静音</md-tooltip>
     </button>
     <div id="volume-duration">
-      <vue-slider v-bind="volume" style="margin-left: 10px;"></vue-slider>
+      <vue-slider v-bind="volumeProgress" v-model="volume"></vue-slider>
     </div>
   </div>
 </template>
 
 <script>
 import vueSlider from 'vue-slider-component';
+import Vue from 'vue';
 
 export default {
   name: 'player',
@@ -45,16 +46,26 @@ export default {
   },
   data () {
     return {
+      iconText: 'play_circle_outline',
+      playText: '播放',
       duration: {
         tooltip: false,
+        min: 0,
+        max: 100,
         processStyle: {
           'background-color': '#e9382a'
         }
       },
-      currentTimer: '00:00',
-      endTime: '00:00',
+      progress: 0,
+      current: '00:00',
+      end: '00:00',
       update: '',
-      volume: {
+      viconText: 'volume_up',
+      volume: 50,
+      volumeProgress: {
+        min: 0,
+        max: 100,
+        value: 50,
         tooltip: 'hover',
         processStyle: {
           'background-color': '#e9382a'
@@ -66,44 +77,57 @@ export default {
     };
   },
   methods: {
-    currentTime () {
-      let cmin = Number.parseInt(this.$refs.player.currentTime / 60, 10);
-      let csec = Number.parseInt(this.$refs.player.currentTime % 60, 10);
-      cmin = cmin < 10 ? ('0' + cmin) : cmin;
-      csec = csec < 10 ? ('0' + csec) : csec;
-      this.currentTimer = cmin + ':' + csec;
+    currentTime: function () {
+      const currentTime = this.$refs.player.currentTime;
+      this.current = Vue.options.filters.timeToStr(currentTime);
+      this.progress = Number.parseInt(currentTime, 10);
     },
-    musicTime () {
-      let mmin = Number.parseInt(this.$refs.player.duration / 60, 10);
-      let msec = Number.parseInt(this.$refs.player.duration % 60, 10);
-      mmin = mmin < 10 ? ('0' + mmin) : mmin;
-      msec = msec < 10 ? ('0' + msec) : msec;
-      this.endTime = mmin + ':' + msec;
+    musicTime: function () {
+      const duration = this.$refs.player.duration;
+      this.end = Vue.options.filters.timeToStr(duration);
+      this.duration.max = Number.parseInt(duration, 10);
     },
-    playMusic () {
-      const ppi = document.getElementById('play-pause-icon');
-      const ppt = document.getElementById('play-pause-text');
+    playControl: function () {
+      this.update = setInterval(this.currentTime, 1000 / 60);
       if (this.$refs.player.paused) {
-        ppi.innerHTML = 'pause_circle_outline';
-        ppt.innerHTML = '暂停';
+        this.iconText = 'pause_circle_outline';
+        this.playText = '暂停';
         this.$refs.player.play();
       } else {
-        ppi.innerHTML = 'play_circle_outline';
-        ppt.innerHTML = '播放';
+        this.iconText = 'play_circle_outline';
+        this.playText = '播放';
         this.$refs.player.pause();
       }
     },
-    volumeControl () {
-      const voice = document.getElementById('voice');
-      if (voice.innerHTML === 'volume_up') {
-        voice.innerHTML = 'volume_off';
+    volumeControl: function () {
+      if (this.viconText === 'volume_up') {
+        this.viconText = 'volume_off';
+        this.$refs.player.muted = true;
       } else {
-        voice.innerHTML = 'volume_up';
+        this.viconText = 'volume_up';
+        this.$refs.player.muted = false;
       }
+    },
+    ended: function () {
+      clearInterval(this.update);
+      this.iconText = 'play_circle_outline';
+      this.playText = '播放';
+      this.$refs.player.pause();
+      this.progress = 0;
     }
   },
   mounted: function () {
-    this.setInterval(this.currentTime(), 1000);
+  },
+  watch: {
+    progress: function (newValue, oldValue) {
+      if (Math.abs(newValue - oldValue) > 1) {
+        this.current = Vue.options.filters.timeToStr(newValue);
+        this.$refs.player.currentTime = newValue;
+      }
+    },
+    volume: function (newValue) {
+      this.$refs.player.volume = newValue / 100;
+    }
   }
 };
 </script>
