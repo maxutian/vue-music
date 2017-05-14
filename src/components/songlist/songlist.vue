@@ -1,8 +1,8 @@
 <template>
-	<md-card id="v-songlist-hover" class="v-songlist-ele" @click.native="test">
+	<md-card id="v-songlist-hover" class="v-songlist-ele" @click.native="$router.push('detail')">
 		<md-card-media-cover md-solid>
 	    <md-card-media md-ratio="1:1">
-	      <img src="../../assets/album.jpg" alt="Skyscraper">
+	      <img :src="albumCover" alt="Skyscraper">
 	    </md-card-media>
 
 	    <md-card-area>
@@ -18,10 +18,12 @@
 
 <script>
 export default {
+  data () {
+    return {
+      albumCover: 'http://p1.music.126.net/AaTjGSJdijZP8EX7sgpbRA==/18669707441975420.jpg'
+    };
+  },
   methods: {
-    test: function () {
-      alert('test');
-    }
   }
 };
 </script>

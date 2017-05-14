@@ -2,7 +2,7 @@
   <div id="app">
     <v-header></v-header>  
     <v-tabbar></v-tabbar>
-    <div id="empty-space"></div>
+    <router-view></router-view>
     <player></player>
   </div>
 </template>
@@ -22,9 +22,5 @@
 </script>
 
 <style>
-  #empty-space{
-    display: block;
-    width: 100%;
-    height: 80px;
-  }
+  
 </style>

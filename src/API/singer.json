@@ -1,0 +1,169 @@
+{
+  "code": 200,
+  "more": true,
+  "artists": [
+    {
+      "img1v1Id": 18569651883380118,
+      "topicPerson": 0,
+      "picId": 19097417462929407,
+      "briefDesc": "",
+      "albumSize": 31,
+      "img1v1Url": "http://p4.music.126.net/Q_ExePNkmgB2yWyLp12dYg==/18569651883380118.jpg",
+      "picUrl": "http://p4.music.126.net/8mv7qP30Pd3oHW8b9Md8IQ==/19097417462929407.jpg",
+      "trans": "",
+      "alias": [
+        "Jay Chou"
+      ],
+      "musicSize": 526,
+      "name": "周杰伦",
+      "id": 6452,
+      "picId_str": "19097417462929407",
+      "img1v1Id_str": "18569651883380118"
+    },
+    {
+      "img1v1Id": 3285340746016446,
+      "topicPerson": 0,
+      "picId": 3287539769315193,
+      "briefDesc": "",
+      "albumSize": 91,
+      "img1v1Url": "http://p4.music.126.net/6xgsfT2ZLjdgzbwO4UiGwA==/3285340746016446.jpg",
+      "picUrl": "http://p4.music.126.net/XZrSQeNpsfjyRmibubCb9Q==/3287539769315193.jpg",
+      "trans": "",
+      "alias": [
+        "Eason Chan"
+      ],
+      "musicSize": 1572,
+      "name": "陈奕迅",
+      "id": 2116
+    },
+    {
+      "img1v1Id": 3250156379592966,
+      "topicPerson": 0,
+      "picId": 3427177755493494,
+      "briefDesc": "",
+      "albumSize": 17,
+      "img1v1Url": "http://p3.music.126.net/ULlwJ2drOfYv-f6-_7jGGQ==/3250156379592966.jpg",
+      "picUrl": "http://p4.music.126.net/cmky1_hu0S0vfFr6U_03Bg==/3427177755493494.jpg",
+      "trans": "",
+      "alias": [
+        
+      ],
+      "musicSize": 158,
+      "name": "薛之谦",
+      "id": 5781,
+      "accountId": 97137413
+    },
+    {
+      "img1v1Id": 18509178743837943,
+      "topicPerson": 0,
+      "picId": 18903903416400051,
+      "briefDesc": "",
+      "albumSize": 60,
+      "img1v1Url": "http://p4.music.126.net/xX5thVMAzBPknNR0PHDkpg==/18509178743837943.jpg",
+      "picUrl": "http://p4.music.126.net/PYGFbSvwSx7VAHYv7KEorw==/18903903416400051.jpg",
+      "trans": "빅뱅",
+      "alias": [
+        
+      ],
+      "musicSize": 568,
+      "name": "BIGBANG",
+      "id": 126339,
+      "picId_str": "18903903416400051",
+      "transNames": [
+        "빅뱅"
+      ],
+      "img1v1Id_str": "18509178743837943"
+    },
+    {
+      "img1v1Id": 3263350518850877,
+      "topicPerson": 0,
+      "picId": 3389794350704969,
+      "briefDesc": "",
+      "albumSize": 33,
+      "img1v1Url": "http://p4.music.126.net/cnGpIQ6rQCKVrDyVVSpzeg==/3263350518850877.jpg",
+      "picUrl": "http://p4.music.126.net/_cB2figc8IpT89DYhpARxA==/3389794350704969.jpg",
+      "trans": "",
+      "alias": [
+        "JJ"
+      ],
+      "musicSize": 415,
+      "name": "林俊杰",
+      "id": 3684
+    },
+    {
+      "img1v1Id": 1385384666932895,
+      "topicPerson": 0,
+      "picId": 18503681184431512,
+      "briefDesc": "",
+      "albumSize": 58,
+      "img1v1Url": "http://p3.music.126.net/h-ynyQrpyIvfJeW_DeaqHA==/1385384666932895.jpg",
+      "picUrl": "http://p4.music.126.net/KG4t8UkdZoJt4BHc45ay9A==/18503681184431512.jpg",
+      "trans": "魔力红",
+      "alias": [
+        
+      ],
+      "musicSize": 603,
+      "name": "Maroon 5",
+      "id": 96266,
+      "picId_str": "18503681184431512",
+      "transNames": [
+        "魔力红"
+      ]
+    },
+    {
+      "img1v1Id": 18727981557622763,
+      "topicPerson": 0,
+      "picId": 18764265441342019,
+      "briefDesc": "",
+      "albumSize": 78,
+      "img1v1Url": "http://p4.music.126.net/GKhjgN1ltQYK3eYf9DdJwg==/18727981557622763.jpg",
+      "picUrl": "http://p4.music.126.net/1KQVD6XWbs5IAV0xOj1ZIA==/18764265441342019.jpg",
+      "trans": "",
+      "alias": [
+        "王靖雯",
+        "Faye Wong"
+      ],
+      "musicSize": 1222,
+      "name": "王菲",
+      "id": 9621,
+      "picId_str": "18764265441342019",
+      "img1v1Id_str": "18727981557622763"
+    },
+    {
+      "img1v1Id": 5828511138922177,
+      "topicPerson": 0,
+      "picId": 5775734580778257,
+      "briefDesc": "",
+      "albumSize": 13,
+      "img1v1Url": "http://p3.music.126.net/xH7i_je62lcQkhQYjNHgfQ==/5828511138922177.jpg",
+      "picUrl": "http://p4.music.126.net/liIDpRAURNI1yqfBMZMssQ==/5775734580778257.jpg",
+      "trans": "",
+      "alias": [
+        
+      ],
+      "musicSize": 72,
+      "name": "李荣浩",
+      "id": 4292,
+      "accountId": 6228671
+    },
+    {
+      "img1v1Id": 18528969953189760,
+      "topicPerson": 0,
+      "picId": 18646617697368402,
+      "briefDesc": "",
+      "albumSize": 28,
+      "img1v1Url": "http://p3.music.126.net/r7uMnwjWpYMuQI_3ZTg56A==/18528969953189760.jpg",
+      "picUrl": "http://p4.music.126.net/o2qzE0Is5Qh1pfSKQiVGkA==/18646617697368402.jpg",
+      "trans": "",
+      "alias": [
+        "G.E.M."
+      ],
+      "musicSize": 236,
+      "name": "G.E.M.邓紫棋",
+      "id": 7763,
+      "accountId": 281382,
+      "picId_str": "18646617697368402",
+      "img1v1Id_str": "18528969953189760"
+    }
+  ]
+}

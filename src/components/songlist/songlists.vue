@@ -29,6 +29,8 @@ export default {
 		justify-content: flex-start;
 		width: 50%;
 		margin: 0 auto;
-		margin-top: 10px;
+		margin-top: 150px;
+		margin-bottom: 90px;
+		padding-left: 2%;
 	}
 </style>

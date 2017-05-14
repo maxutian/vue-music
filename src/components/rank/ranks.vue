@@ -23,6 +23,7 @@ export default {
 		justify-content: space-around;
 		width: 50%;
 		margin: 0 auto;
-		margin-top: 10px;
+		margin-top: 150px;
+		margin-bottom: 90px;
 	}
 </style>

@@ -138,6 +138,7 @@ export default {
     transition: all .3s ease-out;
   }
   #v-player-container{
+    z-index: 2;
     display: flex;
     flex-flow: row wrap;
     align-items: center;
@@ -146,7 +147,7 @@ export default {
     width: 100%;
     height: 90px;
     background-color: #06a2e5;
-    box-shadow: 0 -2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 1px 5px rgba(0,0,0,.2), 0 2px 2px rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.12);
   }
   #v-player-control{
     display: flex;
