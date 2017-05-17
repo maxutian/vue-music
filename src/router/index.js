@@ -10,6 +10,10 @@ Vue.use(Router);
 export default new Router({
   routes: [
     {
+      path: '/',
+      component: songlists
+    },
+    {
       path: '/detail',
       name: 'detail',
       component: detail

@@ -1,5 +1,5 @@
 <template>
-	<md-card id="v-rank-hover" class="v-rank-ele">
+	<md-card id="v-rank-hover" class="v-rank-ele" @click.native="$router.push('detail')">
 		<md-card-media-cover md-solid>
 	    <md-card-media md-ratio="3:1">
 	      <img src="../../assets/billboard-logo.jpg" alt="Skyscraper">

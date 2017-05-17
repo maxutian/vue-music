@@ -1,5 +1,5 @@
 <template>
-	<md-card id="v-singerlist-hover" class="v-singerlist-ele">
+	<md-card id="v-singerlist-hover" class="v-singerlist-ele" @click.native="$router.push('detail')">
 		<md-card-media-cover md-solid>
 	    <md-card-media md-ratio="1:1">
 	      <img src="../../assets/singer.jpg" alt="Skyscraper">

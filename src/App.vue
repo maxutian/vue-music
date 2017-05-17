@@ -1,22 +1,29 @@
 <template>
   <div id="app">
     <v-header></v-header>  
-    <v-tabbar></v-tabbar>
+    <tabbar></tabbar>
     <router-view></router-view>
+    <playlist :style="this.$store.state.listDisplay"></playlist>
     <player></player>
   </div>
 </template>
 
 <script>
-  import header from './components/header.vue';
-  import tabbar from './components/tabbar.vue';
-  import player from './components/player.vue';
+  import header from './components/header';
+  import tabbar from './components/tabbar';
+  import player from './components/player';
+  import playlist from './components/playlist';
 
   export default {
+    data () {
+      return {
+      };
+    },
     components: {
       'v-header': header,
-      'v-tabbar': tabbar,
-      'player': player
+      'tabbar': tabbar,
+      'player': player,
+      'playlist': playlist
     }
   };
 </script>

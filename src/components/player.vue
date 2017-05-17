@@ -32,6 +32,10 @@
     <div id="volume-duration">
       <vue-slider v-bind="volumeProgress" v-model="volume"></vue-slider>
     </div>
+    <button class="v-playlist" @click="$store.commit('showPlaylist')">
+      <i class="material-icons" style="font-size: 2.5em;margin-left: 5px;margin-top: 3px;">playlist_play</i>
+      <md-tooltip md-direction="top">播放列表</md-tooltip>
+    </button>
   </div>
 </template>
 
@@ -89,14 +93,16 @@ export default {
     },
     playControl: function () {
       this.update = setInterval(this.currentTime, 1000 / 60);
-      if (this.$refs.player.paused) {
+      if (!this.$store.state.isPlaying) {
         this.iconText = 'pause_circle_outline';
         this.playText = '暂停';
         this.$refs.player.play();
+        this.$store.commit('playMusic');
       } else {
         this.iconText = 'play_circle_outline';
         this.playText = '播放';
         this.$refs.player.pause();
+        this.$store.commit('pauseMusic');
       }
     },
     volumeControl: function () {
@@ -133,7 +139,7 @@ export default {
 </script>
 
 <style>
-  .play-pause:hover,.v-player-pre:hover,.v-player-next:hover,.v-player-voice:hover{
+  .play-pause:hover,.v-player-pre:hover,.v-player-next:hover,.v-player-voice:hover,.v-playlist:hover{
     background-color: rgba(142,138,138,.5);
     transition: all .3s ease-out;
   }
@@ -189,7 +195,6 @@ export default {
   cursor: pointer;
   width: 40px;
   height: 40px;
-  margin-top: 5px;
   background-color: transparent;
   border: none;
   border-radius: 50%;
@@ -199,5 +204,14 @@ export default {
 }
 #voice{
   font-size: 2em;
+}
+.v-playlist{
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  margin-left: 3%;
 }
 </style>
