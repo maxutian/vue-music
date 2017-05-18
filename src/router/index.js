@@ -19,11 +19,6 @@ export default new Router({
       component: detail
     },
     {
-      path: '/songlists',
-      name: 'songlists',
-      component: songlists
-    },
-    {
       path: '/singerlists',
       name: 'singerlists',
       component: singerlists

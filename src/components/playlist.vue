@@ -6,7 +6,7 @@
 				<span>播放列表</span>
 			</div>
 			<button class="v-playlist-close" @click="$store.commit('showPlaylist')" style="margin-right: 5px;">
-			  <i class="material-icons" style="font-size: 1em;">close</i>
+			  <i class="material-icons" style="font-size: 1em;margin-top: 3px;">close</i>
 			</button>
 		</div>
 		<md-list>

@@ -10,10 +10,12 @@
     "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {
+    "axios": "^0.16.1",
     "fs": "0.0.1-security",
     "net": "^1.0.2",
     "tls": "0.0.1",
     "vue": "^2.2.2",
+    "vue-axios": "^2.0.2",
     "vue-material": "^0.7.1",
     "vue-router": "^2.2.0",
     "vuex": "^2.3.1"

@@ -32,7 +32,7 @@
 
 <style>
 	#header-container{
-		z-index: 2;
+		z-index: 999;
 		position: fixed;
 		left: 0;
 		top: 0;

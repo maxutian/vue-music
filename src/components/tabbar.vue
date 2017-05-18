@@ -1,6 +1,6 @@
 <template>
 	<div id="v-tabbar">
-		<md-button id="choice-1" @click.native="$router.push('songlists')">歌单</md-button>
+		<md-button id="choice-1" @click.native="$router.push('/')">歌单</md-button>
 		<md-button id="choice-2" @click.native="$router.push('singerlists')">歌手</md-button>
 		<md-button id="choice-3" @click.native="$router.push('ranks')">排行榜</md-button>
 	</div>
@@ -12,7 +12,7 @@
 
 <style>
 #v-tabbar{
-	z-index: 2;
+	z-index: 999;
 	display: flex;
 	justify-content: center;
 	position: fixed;

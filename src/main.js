@@ -4,15 +4,19 @@ import Vue from 'vue';
 import App from './App';
 import router from './router';
 import Vuex from 'vuex';
+import axios from 'axios';
+import VueAxios from 'vue-axios';
 import VueMaterial from 'vue-material';
 import 'vue-material/dist/vue-material.css';
 import './filters';
 
 Vue.config.productionTip = false;
 
-// use&config VueMaterial
 Vue.use(VueMaterial);
 Vue.use(Vuex);
+Vue.use(VueAxios, axios);
+
+// use&config VueMaterial
 Vue.material.registerTheme({
   default: {
     primary: 'light-blue',
@@ -26,6 +30,7 @@ Vue.material.registerTheme({
     accent: 'red'
   }
 });
+
 const store = new Vuex.Store({
   state: {
     isPlaying: false,
