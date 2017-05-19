@@ -1,0 +1,38 @@
+  .detail-header{
+    width: 100.5%;
+    box-shadow: 0 1px 3px rgba(0,0,0,.2), 0 1px 1px rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
+  }
+  .v-detail-avatarUrl {
+    width: 250px;
+    height: 250px;
+    margin-top: -80px;
+    box-shadow: 0 1px 5px rgba(0,0,0,.2), 0 2px 2px rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.12);
+  }
+  .creator{
+    position: absolute;
+    top: 10px;
+    left: 280px;
+    font-weight: 400;
+    font-size: 1.3em;
+  }
+  .v-detail-nickname{
+    position: absolute;
+    top: 50px;
+    left: 320px;
+    font-weight: 500;
+    font-size: 2.2em;
+  }
+  .v-detail-signature{
+    position: absolute;
+    top: 90px;
+    left: 320px;
+    font-weight: 400;
+    font-size: 1.2em;
+    width: 35%;
+  }
+  .v-detail-icon{
+    margin-right: 10px !important;
+  }
+  .md-divider{
+    margin-left: 20px !important;
+  }

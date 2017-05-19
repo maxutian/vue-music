@@ -12,7 +12,7 @@
 
 <style>
 #v-tabbar{
-	z-index: 999;
+	z-index: 3;
 	display: flex;
 	justify-content: center;
 	position: fixed;

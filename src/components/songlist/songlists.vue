@@ -4,12 +4,12 @@
       <md-card id="v-songlist-hover" class="v-songlist-ele">
         <md-card-media-cover md-solid>
           <md-card-media md-ratio="1:1">
-            <img :src="item.imgUrl" @click="$router.push({name: 'detail', query: {id: item.id}})" style="cursor: pointer;">
+            <img :src="item.imgUrl" @click="$router.push({name: 'songlistsdetail', query: {id: item.id}})" style="cursor: pointer;">
           </md-card-media>
           <md-card-area style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
             <md-card-header>
-              <span class="songlists-title" @click="$router.push('detail')" style="cursor: pointer;">{{item.name}}</span>
-              <div class="md-subhead">{{formatCount(item.playCount)}}</div>
+              <span class="songlists-title" @click="$router.push({name: 'songlistsdetail', query: {id: item.id}})" style="cursor: pointer;">{{item.name}}</span>
+              <div class="md-subhead">{{formatCount(item.playCount)}}次播放</div>
             </md-card-header>
           </md-card-area>
         </md-card-media-cover>
@@ -52,7 +52,7 @@
   .songlists-title{
     width: 100%;
     font-size: 1.5em;
-    font-weight: 300;
+    font-weight: 400;
   }
   #v-songlists-body{
     display: flex;

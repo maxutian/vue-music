@@ -1,21 +1,15 @@
 <template>
 	<div id="header-container">
-
 		<md-toolbar>
-
-		  <h2 class="md-title header-title">Vue Music</h2>
-
+		  <h2 class="md-title header-title" @click="$router.push('/')" style="cursor: pointer">Vue Music</h2>
 		  <md-input-container md-inline id="v-header-inputContainer">
 		    <md-input placeholder="输入歌曲名以搜索" id="v-header-input"></md-input>
 		  </md-input-container>
-
 		  <md-button class="md-icon-button">
 		  	<md-icon>search</md-icon>
 		  	<md-tooltip md-direction="bottom">搜索歌曲</md-tooltip>
 		  </md-button>
-
 		  <span style="flex: 1"></span>
-
 		  <md-button class="md-icon-button">
 		  	<md-icon>home</md-icon>
 		  	<md-tooltip md-direction="left">返回博客主页</md-tooltip>
@@ -32,7 +26,7 @@
 
 <style>
 	#header-container{
-		z-index: 999;
+		z-index: 3;
 		position: fixed;
 		left: 0;
 		top: 0;
