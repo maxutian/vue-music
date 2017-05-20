@@ -32,7 +32,7 @@
     <div id="volume-duration">
       <vue-slider v-bind="volumeProgress" v-model="volume"></vue-slider>
     </div>
-    <button class="v-playlist" @click="$store.commit('showPlaylist')">
+    <button class="v-playlist" ref="listbutton">
       <i class="material-icons" style="font-size: 2.5em;margin-left: 5px;margin-top: 3px;">playlist_play</i>
       <md-tooltip md-direction="top">播放列表</md-tooltip>
     </button>
@@ -120,9 +120,17 @@ export default {
       this.playText = '播放';
       this.$refs.player.pause();
       this.progress = 0;
+    },
+    showList: function () {
+      this.$store.state.showList = !this.$store.state.showList;
     }
   },
   mounted: function () {
+    document.addEventListener('click', (e) => {
+      if (this.$refs.listbutton.contains(e.target)) {
+        this.showList();
+      }
+    });
   },
   watch: {
     progress: function (newValue, oldValue) {

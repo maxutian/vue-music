@@ -34,24 +34,32 @@ Vue.material.registerTheme({
 const store = new Vuex.Store({
   state: {
     isPlaying: false,
-    listDisplay: 'display: none',
-    showList: true
+    showList: false,
+    listactive: true,
+    singeractive: false,
+    rankactive: false
   },
   mutations: {
-    showPlaylist: state => {
-      if (state.showList) {
-        state.listDisplay = 'display: block';
-        state.showList = false;
-      } else {
-        state.listDisplay = 'display: none';
-        state.showList = true;
-      }
-    },
     playMusic: state => {
       state.isPlaying = true;
     },
     pauseMusic: state => {
       state.isPlaying = false;
+    },
+    listActive: state => {
+      state.listactive = true;
+      state.singeractive = false;
+      state.rankactive = false;
+    },
+    singerActive: state => {
+      state.listactive = false;
+      state.singeractive = true;
+      state.rankactive = false;
+    },
+    rankActive: state => {
+      state.listactive = false;
+      state.singeractive = false;
+      state.rankactive = true;
     }
   },
   actions: {

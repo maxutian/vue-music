@@ -7,3 +7,7 @@ Vue.filter('timeToStr', time => {
   seconds = seconds < 10 ? ('0' + seconds) : seconds;
   return min + ':' + seconds;
 });
+
+Vue.filter('playCountFormat', playCount => {
+  return playCount < 100000 ? playCount : Math.floor(playCount / 10000) + '万';
+});

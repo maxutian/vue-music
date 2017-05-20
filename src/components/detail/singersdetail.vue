@@ -13,7 +13,8 @@
     </div>
     <div style="margin-top: 10px">
       <template v-for="item in singerdetails">
-        <md-list-item>
+        <md-list-item class="v-detail-items">
+          <md-ink-ripple />
           <md-icon class="v-detail-icon">play_arrow</md-icon>
           <div><span style="color: #e9382a;font-weight: 500;">{{item.name}}</span></div>
           <div>{{item.duration}}</div>

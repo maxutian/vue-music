@@ -5,7 +5,7 @@
         <img :src="avatarUrl" class="v-detail-avatarUrl">
       </div>
       <div class="creator">
-        <span>created by:</span>
+        <span>Created By :</span>
       </div>
       <div class="v-detail-nickname">
         <span>{{nickname}}</span>
@@ -16,7 +16,8 @@
     </div>
     <div style="margin-top: 10px;">
       <template v-for="item in details">
-        <md-list-item>
+        <md-list-item class="v-detail-items">
+          <md-ink-ripple />
           <md-icon class="v-detail-icon">play_arrow</md-icon>
           <div><span style="color: #e9382a;font-weight: 500;">{{item.name}}</span> / {{item.arname}}</div>
           <div>{{item.duration}}</div>
