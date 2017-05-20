@@ -1,5 +1,14 @@
 <template>
   <md-list id="v-songdetail-container">
+    <transition name="loadAnimation">
+      <div class="animation-container" v-if="isloading">
+        <div class="dots-container">
+          <div class="dot1"></div>
+          <div class="dot2"></div>
+          <div class="dot3"></div>
+        </div>
+      </div>
+    </transition>
     <div class="detail-header">
       <div>
         <img :src="avatarUrl" class="v-detail-avatarUrl">
@@ -38,10 +47,18 @@
         details: [],
         avatarUrl: '',
         nickname: '',
-        signature: ''
+        signature: '',
+        isloading: true,
+        show: ''
       };
     },
+    methods: {
+      showContent: function () {
+        this.isloading = false;
+      }
+    },
     mounted () {
+      this.show = setTimeout(this.showContent, 1500);
       this.details = [];
       this.axios.get('http://localhost:3000/playlist/detail?id=' + this.$route.query.id).then(res => {
         this.avatarUrl = res.data.playlist.creator.avatarUrl;

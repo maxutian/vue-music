@@ -1,13 +1,13 @@
 <template>
   <div id="v-tabbar">
     <md-button id="choice-1" @click.native="$router.push('/'),listActive()">
-      <div :class="{'v-tabbar-active': listactive}">歌单</div>
+      <div :class="{'v-tabbar-active': this.$store.state.listactive}">歌单</div>
     </md-button>
     <md-button id="choice-2" @click.native="$router.push('singerlists'),singerActive()">
-      <div :class="{'v-tabbar-active': singeractive}">歌手</div>
+      <div :class="{'v-tabbar-active': this.$store.state.singeractive}">歌手</div>
     </md-button>
     <md-button id="choice-3" @click.native="$router.push('ranks'),rankActive()">
-      <div :class="{'v-tabbar-active': rankactive}">排行榜</div>
+      <div :class="{'v-tabbar-active': this.$store.state.rankactive}">排行榜</div>
     </md-button>
   </div>
 </template>
@@ -15,28 +15,15 @@
 <script>
 export default {
   name: 'tabbar',
-  data () {
-    return {
-      listactive: true,
-      singeractive: false,
-      rankactive: false
-    };
-  },
   methods: {
     listActive: function () {
-      this.listactive = true;
-      this.singeractive = false;
-      this.rankactive = false;
+      this.$store.commit('listActive');
     },
     singerActive: function () {
-      this.listactive = false;
-      this.singeractive = true;
-      this.rankactive = false;
+      this.$store.commit('singerActive');
     },
     rankActive: function () {
-      this.listactive = false;
-      this.singeractive = false;
-      this.rankactive = true;
+      this.$store.commit('rankActive');
     }
   }
 };

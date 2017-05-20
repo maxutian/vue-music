@@ -1,28 +1,37 @@
 <template>
-	<md-list id="v-rankdetail-container">
-	  <div class="detail-header">
-	    <div>
-	      <img :src="avatarUrl" class="v-detail-avatarUrl">
-	    </div>
-	    <div class="v-detail-nickname">
-	      <span>{{nickname}}</span>
-	    </div>
-	    <div class="v-detail-signature">
-	      <span>{{signature}}</span>
-	    </div>
-	  </div>
-	  <div style="margin-top: 10px;">
-	    <template v-for="item in rankdetails">
-	      <md-list-item class="v-detail-items">
-	      	<md-ink-ripple />
-	        <md-icon class="v-detail-icon">play_arrow</md-icon>
-	        <div><span style="color: #e9382a;font-weight: 500;">{{item.name}}</span> / {{item.arname}}</div>
-	        <div>{{item.duration}}</div>
-	        <md-divider class="md-inset"></md-divider>
-	      </md-list-item>
-	    </template>
-	  </div>
-	</md-list>
+  <md-list id="v-rankdetail-container">
+    <transition name="loadAnimation">
+      <div class="animation-container" v-if="isloading">
+        <div class="dots-container">
+          <div class="dot1"></div>
+          <div class="dot2"></div>
+          <div class="dot3"></div>
+        </div>
+      </div>
+    </transition>
+    <div class="detail-header">
+      <div>
+        <img :src="avatarUrl" class="v-detail-avatarUrl">
+      </div>
+      <div class="v-detail-nickname">
+        <span>{{nickname}}</span>
+      </div>
+      <div class="v-detail-signature">
+        <span>{{signature}}</span>
+      </div>
+    </div>
+    <div style="margin-top: 10px;">
+      <template v-for="item in rankdetails">
+        <md-list-item class="v-detail-items">
+          <md-ink-ripple />
+          <md-icon class="v-detail-icon">play_arrow</md-icon>
+          <div><span style="color: #e9382a;font-weight: 500;">{{item.name}}</span> / {{item.arname}}</div>
+          <div>{{item.duration}}</div>
+          <md-divider class="md-inset"></md-divider>
+        </md-list-item>
+      </template>
+    </div>
+  </md-list>
 </template>
 
 <script>
@@ -35,10 +44,18 @@ export default {
       rankdetails: [],
       avatarUrl: '',
       nickname: '',
-      signature: ''
+      signature: '',
+      isloading: true,
+      show: ''
     };
   },
+  methods: {
+    showContent: function () {
+      this.isloading = false;
+    }
+  },
   mounted () {
+    this.show = setTimeout(this.showContent, 600);
     this.rankdetails = [];
     this.axios.get('http://localhost:3000/top/list?idx=6').then(res => {
       this.avatarUrl = res.data.result.creator.avatarUrl;
@@ -59,16 +76,16 @@ export default {
 </script>
 
 <style>
-	#v-rankdetail-container{
-	  z-index: 1;
-	  position: relative;
-	  width: 50%;
-	  margin: 0 auto;
-	  margin-top: 230px;
-	  margin-bottom: 120px;
-	  padding-top: 0;
-	  padding-bottom: 30px;
-	  padding-right: 5px;
-	  box-shadow: 0 1px 5px rgba(0,0,0,.2), 0 2px 2px rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.12);
-	}
+  #v-rankdetail-container{
+    z-index: 1;
+    position: relative;
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 230px;
+    margin-bottom: 120px;
+    padding-top: 0;
+    padding-bottom: 30px;
+    padding-right: 5px;
+    box-shadow: 0 1px 5px rgba(0,0,0,.2), 0 2px 2px rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.12);
+  }
 </style>

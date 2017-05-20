@@ -2,7 +2,7 @@
   <div id="header-container">
     <md-toolbar>
       <h2 class="md-title header-title" 
-          @click="$router.push('/')" 
+          @click="$router.push('/'),test()" 
           style="cursor: pointer">Vue Music</h2>
       <md-input-container md-inline id="v-header-inputContainer">
         <md-input placeholder="输入歌曲名以搜索" id="v-header-input"></md-input>
@@ -23,7 +23,13 @@
 </template>
 
 <script>
-
+export default {
+  methods: {
+    test: function () {
+      this.$store.commit('listActive');
+    }
+  }
+};
 </script>
 
 <style>

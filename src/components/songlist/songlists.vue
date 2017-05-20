@@ -4,7 +4,9 @@
       <md-card id="v-songlist-hover" class="v-songlist-ele">
         <md-card-media-cover md-solid>
           <md-card-media md-ratio="1:1">
-            <img :src="item.imgUrl" @click="$router.push({name: 'songlistsdetail', query: {id: item.id}})" style="cursor: pointer;">
+            <img :src="item.imgUrl" 
+                 @click="$router.push({name: 'songlistsdetail', query: {id: item.id}})" 
+                 style="cursor: pointer;">
           </md-card-media>
           <md-card-area style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
             <md-card-header>
