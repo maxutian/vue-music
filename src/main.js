@@ -37,7 +37,8 @@ const store = new Vuex.Store({
     showList: false,
     listactive: true,
     singeractive: false,
-    rankactive: false
+    rankactive: false,
+    songList: []
   },
   mutations: {
     playMusic: state => {
@@ -60,6 +61,17 @@ const store = new Vuex.Store({
       state.listactive = false;
       state.singeractive = false;
       state.rankactive = true;
+    },
+    addSong: (state, obj) => {
+      for (let item in state.songList) {
+        if (state.songList[item].name === obj.name && state.songList[item].arname === obj.arname) {
+          return;
+        }
+      }
+      state.songList.unshift(obj);
+    },
+    clearList: state => {
+      state.songList = [];
     }
   },
   actions: {

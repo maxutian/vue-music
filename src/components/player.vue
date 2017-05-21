@@ -42,7 +42,7 @@
 
     <!-- playlist -->
 
-    <div ref="listbody" style="margin-left: 3%;">
+    <div ref="listbody">
 
       <div>
         <button class="v-playlist-button" @click="showList()">
@@ -55,7 +55,9 @@
 
         <div id="v-playlist" v-if="(this.$store.state.showList)">
           <div class="v-playlist-tabbar">
-            <span style="width: 40px;"></span>
+            <button class="v-playlist-clear" style="margin-left: 2.5%;" @click="clearList()">
+              <i class="material-icons" style="font-size: 1.8em;">delete_sweep</i>
+            </button>
             <div class="v-playlist-title">
               <span>播放列表</span>
             </div>
@@ -63,14 +65,18 @@
               <i class="material-icons" style="font-size: 1em;margin-top: 3px;">close</i>
             </button>
           </div>
-
-          <md-list>
-            <md-list-item class="v-detail-items v-playlist-items">
-              <md-ink-ripple />
-              <md-icon class="v-detail-icon">play_arrow</md-icon><span>song1</span>
-              <md-divider class="md-inset"></md-divider>
-            </md-list-item>
-          </md-list>
+          
+          <div style="margin-top: 55px;">
+            <md-list v-for="item in this.$store.state.songList">
+              <md-list-item class="v-detail-items v-playlist-items">
+                <md-ink-ripple />
+                <md-icon class="v-detail-icon">play_arrow</md-icon>
+                <div><span style="color: #e9382a;font-weight: 500;">{{item.name}}</span> / {{item.arname}}</div>
+                <div>{{item.duration}}</div>
+                <md-divider class="md-inset"></md-divider>
+              </md-list-item>
+            </md-list>
+          </div>
         </div>
 
       </transition>
@@ -163,6 +169,9 @@ export default {
     },
     showList: function () {
       this.$store.state.showList = !this.$store.state.showList;
+    },
+    clearList: function () {
+      this.$store.commit('clearList');
     }
   },
   mounted: function () {
@@ -259,6 +268,7 @@ export default {
   cursor: pointer;
   width: 50px;
   height: 50px;
+  margin-left: 3%;
   background-color: transparent;
   border: none;
   border-radius: 50%;
@@ -270,8 +280,12 @@ export default {
   bottom: 90px;
   width: 40%;
   height: 60%;
+  overflow: scroll;
   background-color: #fff;
   box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px rgba(0,0,0,.14), 0 1px 18px rgba(0,0,0,.12);
+}
+#v-playlist::-webkit-scrollbar{
+  width: 18px;
 }
 .v-playlist-tabbar{
   z-index: 999;
@@ -279,9 +293,10 @@ export default {
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
-  position: relative;
-  top: 0;
-  width: 100%;
+  position: fixed;
+  right: 0;
+  bottom: 60% + 40px;
+  width: 40%;
   height: 50px;
   background-color: #06a2e5;
 }
@@ -293,7 +308,7 @@ export default {
   border-radius: 5px;
   background-color: #ccc;
 }
-.v-playlist-close{
+.v-playlist-close,.v-playlist-clear{
   cursor: pointer;
   width: 30px;
   height: 30px;
@@ -301,7 +316,7 @@ export default {
   border: none;
   border-radius: 50%;
 }
-.v-playlist-close:hover{
+.v-playlist-close:hover,.v-playlist-clear:hover{
   background-color: rgba(142,138,138,.5);
   transition: all .3s ease-out;
 }

@@ -24,8 +24,8 @@
       </div>
     </div>
     <div style="margin-top: 10px;">
-      <template v-for="item in details">
-        <md-list-item class="v-detail-items">
+      <template>
+        <md-list-item v-for="(item, index) in details" class="v-detail-items" @click.native="changeList(index)">
           <md-ink-ripple />
           <md-icon class="v-detail-icon">play_arrow</md-icon>
           <div><span style="color: #e9382a;font-weight: 500;">{{item.name}}</span> / {{item.arname}}</div>
@@ -48,17 +48,19 @@
         avatarUrl: '',
         nickname: '',
         signature: '',
-        isloading: true,
-        show: ''
+        isloading: true
       };
     },
     methods: {
       showContent: function () {
         this.isloading = false;
+      },
+      changeList: function (index) {
+        this.$store.commit('addSong', this.details[index]);
       }
     },
     mounted () {
-      this.show = setTimeout(this.showContent, 1500);
+      setTimeout(this.showContent, 1000);
       this.details = [];
       this.axios.get('http://localhost:3000/playlist/detail?id=' + this.$route.query.id).then(res => {
         this.avatarUrl = res.data.playlist.creator.avatarUrl;
@@ -69,7 +71,7 @@
             name: item.name,
             id: item.id,
             arname: item.ar[0].name,
-            duration: Vue.options.filters.timeToStr(item.dt / 1000)
+            duration: Vue.options.filters.timeToStr(item.dt / 1800)
           };
           this.details.push(obj);
         });

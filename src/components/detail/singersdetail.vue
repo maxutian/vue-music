@@ -45,8 +45,7 @@
         singerUrl: '',
         singerName: '',
         alias: '',
-        isloading: true,
-        show: ''
+        isloading: true
       };
     },
     methods: {
@@ -55,7 +54,7 @@
       }
     },
     mounted () {
-      this.show = setTimeout(this.showContent, 600);
+      setTimeout(this.showContent, 600);
       this.singerdetails = [];
       this.axios.get('http://localhost:3000/artists?id=' + this.$route.query.id).then(res => {
         this.singerUrl = res.data.artist.picUrl;

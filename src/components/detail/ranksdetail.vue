@@ -45,8 +45,7 @@ export default {
       avatarUrl: '',
       nickname: '',
       signature: '',
-      isloading: true,
-      show: ''
+      isloading: true
     };
   },
   methods: {
@@ -55,7 +54,7 @@ export default {
     }
   },
   mounted () {
-    this.show = setTimeout(this.showContent, 600);
+    setTimeout(this.showContent, 600);
     this.rankdetails = [];
     this.axios.get('http://localhost:3000/top/list?idx=6').then(res => {
       this.avatarUrl = res.data.result.creator.avatarUrl;
