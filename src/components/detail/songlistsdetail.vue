@@ -25,7 +25,9 @@
     </div>
     <div style="margin-top: 10px;">
       <template>
-        <md-list-item v-for="(item, index) in details" class="v-detail-items" @click.native="changeList(index)">
+        <md-list-item v-for="(item, index) in details" :key="item.id" 
+                      class="v-detail-items" 
+                      @click.native="changeList(index), changeHide()">
           <md-ink-ripple />
           <md-icon class="v-detail-icon">play_arrow</md-icon>
           <div><span style="color: #e9382a;font-weight: 500;">{{item.name}}</span> / {{item.arname}}</div>
@@ -57,10 +59,13 @@
       },
       changeList: function (index) {
         this.$store.commit('addSong', this.details[index]);
+      },
+      changeHide: function () {
+        this.$store.commit('changeHide');
       }
     },
     mounted () {
-      setTimeout(this.showContent, 1000);
+      setTimeout(this.showContent, 1800);
       this.details = [];
       this.axios.get('http://localhost:3000/playlist/detail?id=' + this.$route.query.id).then(res => {
         this.avatarUrl = res.data.playlist.creator.avatarUrl;

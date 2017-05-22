@@ -44,42 +44,42 @@
 
     <div ref="listbody">
 
-      <div>
-        <button class="v-playlist-button" @click="showList()">
-          <i class="material-icons" style="font-size: 2.5em;margin-left: 5px;margin-top: 3px;">playlist_play</i>
-          <md-tooltip md-direction="top">播放列表</md-tooltip>
-        </button>
-      </div>
+      <button class="v-playlist-button" @click="showList()">
+        <i class="material-icons" style="font-size: 2.5em;margin-left: 5px;margin-top: 3px;">playlist_play</i>
+        <md-tooltip md-direction="top">播放列表</md-tooltip>
+      </button>
 
-      <transition name="showlist">
+      <div class="v-playlist-body">
+        <transition name="showlist">
 
-        <div id="v-playlist" v-if="(this.$store.state.showList)">
-          <div class="v-playlist-tabbar">
-            <button class="v-playlist-clear" style="margin-left: 2.5%;" @click="clearList()">
-              <i class="material-icons" style="font-size: 1.8em;">delete_sweep</i>
-            </button>
-            <div class="v-playlist-title">
-              <span>播放列表</span>
+          <div id="v-playlist" v-if="(this.$store.state.showList)">
+            <div class="v-playlist-tabbar">
+              <button class="v-playlist-clear" style="margin-left: 2.5%;" @click="clearList()">
+                <i class="material-icons" style="font-size: 1.8em;">delete_sweep</i>
+              </button>
+              <div class="v-playlist-title">
+                <span>播放列表</span>
+              </div>
+              <button class="v-playlist-close" style="margin-right: 5px;" @click="showList()">
+                <i class="material-icons" style="font-size: 1em;margin-top: 3px;">close</i>
+              </button>
             </div>
-            <button class="v-playlist-close" style="margin-right: 5px;" @click="showList()">
-              <i class="material-icons" style="font-size: 1em;margin-top: 3px;">close</i>
-            </button>
+            
+            <div style="margin-top: 55px;">
+              <md-list v-for="item in this.$store.state.songList" :key="item.id">
+                <md-list-item class="v-detail-items v-playlist-items">
+                  <md-ink-ripple />
+                  <md-icon class="v-detail-icon">play_arrow</md-icon>
+                  <div><span style="color: #e9382a;font-weight: 500;">{{item.name}}</span> / {{item.arname}}</div>
+                  <div>{{item.duration}}</div>
+                  <md-divider class="md-inset"></md-divider>
+                </md-list-item>
+              </md-list>
+            </div>
           </div>
-          
-          <div style="margin-top: 55px;">
-            <md-list v-for="item in this.$store.state.songList">
-              <md-list-item class="v-detail-items v-playlist-items">
-                <md-ink-ripple />
-                <md-icon class="v-detail-icon">play_arrow</md-icon>
-                <div><span style="color: #e9382a;font-weight: 500;">{{item.name}}</span> / {{item.arname}}</div>
-                <div>{{item.duration}}</div>
-                <md-divider class="md-inset"></md-divider>
-              </md-list-item>
-            </md-list>
-          </div>
-        </div>
 
-      </transition>
+        </transition>
+      </div>
     </div>
 
   </div>
@@ -198,59 +198,59 @@ export default {
 </script>
 
 <style>
-  .play-pause:hover,.v-player-pre:hover,.v-player-next:hover,.v-player-voice:hover,.v-playlist-button:hover{
-    background-color: rgba(142,138,138,.5);
-    transition: all .3s ease-out;
-  }
-  #v-player-container{
-    z-index: 2;
-    display: flex;
-    flex-flow: row wrap;
-    align-items: center;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    height: 90px;
-    background-color: #06a2e5;
-    box-shadow: 0 1px 5px rgba(0,0,0,.2), 0 2px 2px rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.12);
-  }
-  #v-player-control{
-    display: flex;
-    align-items: center;
-    margin-left: 20px;
-  }
-  .play-pause{
-    cursor: pointer;
-    width: 65px;
-    height: 65px;
-    margin-top: -3px;
-    background-color: transparent;
-    border: none;
-    border-radius: 50%;
-  }
-  #play-pause-icon{
-    font-size: 4em;
-    margin-top: 3px;
-  }
-  .v-player-pre,.v-player-next{
-    cursor: pointer;
-    width: 50px;
-    height: 50px;
-    background-color: transparent;
-    border: none;
-    border-radius: 50%;
-  }
-  #previous,#next{
-    font-size: 3em;
-  }
-  #progress{
-    width: 65%;
-  }
-  #time{
-    font-size: 1.3em;
-    margin-left: 1%;
-  }
-  .v-player-voice{
+.play-pause:hover,.v-player-pre:hover,.v-player-next:hover,.v-player-voice:hover,.v-playlist-button:hover{
+  background-color: rgba(142,138,138,.5);
+  transition: all .3s ease-out;
+}
+#v-player-container{
+  z-index: 2;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 90px;
+  background-color: #06a2e5;
+  box-shadow: 0 1px 5px rgba(0,0,0,.2), 0 2px 2px rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.12);
+}
+#v-player-control{
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+}
+.play-pause{
+  cursor: pointer;
+  width: 65px;
+  height: 65px;
+  margin-top: -3px;
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+}
+#play-pause-icon{
+  font-size: 4em;
+  margin-top: 3px;
+}
+.v-player-pre,.v-player-next{
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+}
+#previous,#next{
+  font-size: 3em;
+}
+#progress{
+  width: 65%;
+}
+#time{
+  font-size: 1.3em;
+  margin-left: 1%;
+}
+.v-player-voice{
   cursor: pointer;
   width: 40px;
   height: 40px;
@@ -266,9 +266,11 @@ export default {
 }
 .v-playlist-button{
   cursor: pointer;
+  position: absolute;
+  right: 2%;
+  bottom: 20px;
   width: 50px;
   height: 50px;
-  margin-left: 3%;
   background-color: transparent;
   border: none;
   border-radius: 50%;
@@ -285,7 +287,7 @@ export default {
   box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px rgba(0,0,0,.14), 0 1px 18px rgba(0,0,0,.12);
 }
 #v-playlist::-webkit-scrollbar{
-  width: 18px;
+  width: 5px;
 }
 .v-playlist-tabbar{
   z-index: 999;
@@ -326,7 +328,6 @@ export default {
 }
 .showlist-enter,.showlist-leave-active{
   opacity: 0;
-  transform: translateX(40%);
 }
 .showlist-enter-active,.showlist-leave-active{
   transition: all .3s cubic-bezier(.69,.01,.04,1.17);
