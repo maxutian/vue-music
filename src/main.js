@@ -7,8 +7,10 @@ import Vuex from 'vuex';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 import VueMaterial from 'vue-material';
-import 'vue-material/dist/vue-material.css';
 import './filters';
+import './style/detail.css';
+import './style/animation.css';
+import 'vue-material/dist/vue-material.css';
 
 Vue.config.productionTip = false;
 
@@ -33,12 +35,18 @@ Vue.material.registerTheme({
 
 const store = new Vuex.Store({
   state: {
-    isPlaying: false,
+    isPlaying: true,
     showList: false,
     listactive: true,
     singeractive: false,
     rankactive: false,
-    songList: []
+    mp3Url: '',
+    songList: [{
+      name: 'The Beautiful People',
+      id: '21256392',
+      duration: '03:38',
+      arname: 'Marilyn Manson'
+    }]
   },
   mutations: {
     playMusic: state => {

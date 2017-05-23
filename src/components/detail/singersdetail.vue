@@ -21,8 +21,10 @@
       </div>
     </div>
     <div style="margin-top: 10px">
-      <template v-for="item in singerdetails">
-        <md-list-item class="v-detail-items">
+      <template>
+        <md-list-item v-for="(item, index) in singerdetails" :key="item.id" 
+                      class="v-detail-items" 
+                      @click.native="changeList(index), changeUrl(index)">
           <md-ink-ripple />
           <md-icon class="v-detail-icon">play_arrow</md-icon>
           <div><span style="color: #e9382a;font-weight: 500;">{{item.name}}</span></div>
@@ -51,6 +53,14 @@
     methods: {
       showContent: function () {
         this.isloading = false;
+      },
+      changeList: function (index) {
+        this.$store.commit('addSong', this.singerdetails[index]);
+      },
+      changeUrl: function (index) {
+        this.axios.get('http://localhost:3000/music/url?id=' + this.singerdetails[index].id).then(res => {
+          this.$store.state.mp3Url = res.data.data[0].url;
+        });
       }
     },
     mounted () {
@@ -64,6 +74,7 @@
           let obj = {
             name: item.name,
             id: item.id,
+            arname: res.data.artist.name,
             duration: Vue.options.filters.timeToStr(item.dt / 1000)
           };
           this.singerdetails.push(obj);

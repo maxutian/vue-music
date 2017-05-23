@@ -27,7 +27,7 @@
       <template>
         <md-list-item v-for="(item, index) in details" :key="item.id" 
                       class="v-detail-items" 
-                      @click.native="changeList(index), changeHide()">
+                      @click.native="changeList(index), changeUrl(index)">
           <md-ink-ripple />
           <md-icon class="v-detail-icon">play_arrow</md-icon>
           <div><span style="color: #e9382a;font-weight: 500;">{{item.name}}</span> / {{item.arname}}</div>
@@ -60,12 +60,14 @@
       changeList: function (index) {
         this.$store.commit('addSong', this.details[index]);
       },
-      changeHide: function () {
-        this.$store.commit('changeHide');
+      changeUrl: function (index) {
+        this.axios.get('http://localhost:3000/music/url?id=' + this.details[index].id).then(res => {
+          this.$store.state.mp3Url = res.data.data[0].url;
+        });
       }
     },
     mounted () {
-      setTimeout(this.showContent, 1800);
+      setTimeout(this.showContent, 2300);
       this.details = [];
       this.axios.get('http://localhost:3000/playlist/detail?id=' + this.$route.query.id).then(res => {
         this.avatarUrl = res.data.playlist.creator.avatarUrl;
@@ -76,7 +78,7 @@
             name: item.name,
             id: item.id,
             arname: item.ar[0].name,
-            duration: Vue.options.filters.timeToStr(item.dt / 1800)
+            duration: Vue.options.filters.timeToStr(item.dt / 1000)
           };
           this.details.push(obj);
         });
@@ -85,7 +87,7 @@
   };
 </script>
 
-<style>
+<style scoped>
   #v-songdetail-container{
     z-index: 1;
     position: relative;

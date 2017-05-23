@@ -1,8 +1,7 @@
 <template>
   <div id="v-player-container">
 
-    <audio ref="player" @canplay="musicTime" @ended="ended" id="v-player-music">
-      <source src="http://m2.music.126.net/XVILMKj3bTnirqOXc1x5xA==/1318314441705656.mp3">
+    <audio ref="player" @ended="ended" id="v-player-music" :src="this.$store.state.mp3Url" @canplay="musicTime(), setInterval()" autoplay="autoplay">
     </audio>
 
     <!-- 三个按钮 -->
@@ -12,7 +11,7 @@
         <i class="material-icons" id="previous">skip_previous</i>
         <md-tooltip md-direction="top">上一首</md-tooltip>
       </button>
-      <button @click="playControl" class="play-pause">
+      <button @click="playControl()" class="play-pause">
         <i class="material-icons" id="play-pause-icon">{{iconText}}</i>
         <md-tooltip md-direction="top" id="play-pause-text">{{playText}}</md-tooltip>
       </button>
@@ -53,6 +52,7 @@
         <transition name="showlist">
 
           <div id="v-playlist" v-if="(this.$store.state.showList)">
+
             <div class="v-playlist-tabbar">
               <button class="v-playlist-clear" style="margin-left: 2.5%;" @click="clearList()">
                 <i class="material-icons" style="font-size: 1.8em;">delete_sweep</i>
@@ -65,8 +65,10 @@
               </button>
             </div>
             
-            <div style="margin-top: 55px;">
-              <md-list v-for="item in this.$store.state.songList" :key="item.id">
+            <div style="width:100%; height: 15px;"></div>
+
+            <div style="margin-top: 50px;">
+              <md-list v-for="(item, index) in this.$store.state.songList" :key="item.id" @click.native="changeUrl(index)">
                 <md-list-item class="v-detail-items v-playlist-items">
                   <md-ink-ripple />
                   <md-icon class="v-detail-icon">play_arrow</md-icon>
@@ -96,8 +98,8 @@ export default {
   },
   data () {
     return {
-      iconText: 'play_circle_outline',
-      playText: '播放',
+      iconText: 'pause_circle_outline',
+      playText: '暂停',
       duration: {
         tooltip: false,
         min: 0,
@@ -137,18 +139,24 @@ export default {
       this.end = Vue.options.filters.timeToStr(duration);
       this.duration.max = Number.parseInt(duration, 10);
     },
-    playControl: function () {
-      this.update = setInterval(this.currentTime, 1000 / 60);
-      if (!this.$store.state.isPlaying) {
-        this.iconText = 'pause_circle_outline';
-        this.playText = '暂停';
-        this.$refs.player.play();
-        this.$store.commit('playMusic');
+    setInterval: function () {
+      if (this.$store.state.songList.length === 0) {
+        return;
       } else {
+        this.update = setInterval(this.currentTime, 100);
+      }
+    },
+    playControl: function () {
+      if (this.$store.state.isPlaying) {
         this.iconText = 'play_circle_outline';
         this.playText = '播放';
         this.$refs.player.pause();
         this.$store.commit('pauseMusic');
+      } else {
+        this.iconText = 'pause_circle_outline';
+        this.playText = '暂停';
+        this.$refs.player.play();
+        this.$store.commit('playMusic');
       }
     },
     volumeControl: function () {
@@ -172,9 +180,17 @@ export default {
     },
     clearList: function () {
       this.$store.commit('clearList');
+    },
+    changeUrl: function (index) {
+      this.axios.get('http://localhost:3000/music/url?id=' + this.$store.state.songList[index].id).then(res => {
+        this.$store.state.mp3Url = res.data.data[0].url;
+      });
     }
   },
   mounted: function () {
+    this.axios.get('http://localhost:3000/music/url?id=' + this.$store.state.songList[0].id).then(res => {
+      this.$store.state.mp3Url = res.data.data[0].url;
+    });
     document.addEventListener('click', (e) => {
       if (this.$store.state.showList && this.$refs.listbody.contains(e.target)) {
         return;
@@ -267,7 +283,7 @@ export default {
 .v-playlist-button{
   cursor: pointer;
   position: absolute;
-  right: 2%;
+  right: 1%;
   bottom: 20px;
   width: 50px;
   height: 50px;
@@ -324,7 +340,7 @@ export default {
 }
 .v-playlist-items{
   width: 98%;
-  margin: 0 auto;
+  margin-top: -13px;
 }
 .showlist-enter,.showlist-leave-active{
   opacity: 0;
