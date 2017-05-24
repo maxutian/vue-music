@@ -62,7 +62,12 @@
       },
       changeUrl: function (index) {
         this.axios.get('http://localhost:3000/music/url?id=' + this.details[index].id).then(res => {
+          if (res.data.data[0].url === null) {
+            alert('Sorry,该音乐暂时无法播放');
+            return;
+          }
           this.$store.state.mp3Url = res.data.data[0].url;
+          this.$store.state.playIndex = 0;
         });
       }
     },

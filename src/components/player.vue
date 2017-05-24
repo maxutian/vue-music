@@ -7,7 +7,7 @@
     <!-- 三个按钮 -->
 
     <div id="v-player-control">
-      <button @click="" class="v-player-pre">
+      <button @click="preSong()" class="v-player-pre">
         <i class="material-icons" id="previous">skip_previous</i>
         <md-tooltip md-direction="top">上一首</md-tooltip>
       </button>
@@ -15,7 +15,7 @@
         <i class="material-icons" id="play-pause-icon">{{iconText}}</i>
         <md-tooltip md-direction="top" id="play-pause-text">{{playText}}</md-tooltip>
       </button>
-      <button @click="" class="v-player-next">
+      <button @click="nextSong()" class="v-player-next">
         <i class="material-icons" id="next">skip_next</i>
         <md-tooltip md-direction="top">下一首</md-tooltip>
       </button>
@@ -100,6 +100,7 @@ export default {
     return {
       iconText: 'pause_circle_outline',
       playText: '暂停',
+      isPlay: false,
       duration: {
         tooltip: false,
         min: 0,
@@ -159,6 +160,34 @@ export default {
         this.$store.commit('playMusic');
       }
     },
+    nextSong: function () {
+      if (this.$store.state.playIndex === this.$store.state.songList.length - 1) {
+        this.$store.state.playIndex = 0;
+        this.axios.get('http://localhost:3000/music/url?id=' + this.$store.state.songList[0].id).then(res => {
+          this.$store.state.mp3Url = res.data.data[0].url;
+          this.$store.state.playIndex = 0;
+        });
+      } else {
+        this.axios.get('http://localhost:3000/music/url?id=' + this.$store.state.songList[this.$store.state.playIndex + 1].id).then(res => {
+          this.$store.state.mp3Url = res.data.data[0].url;
+          this.$store.state.playIndex++;
+        });
+      }
+    },
+    preSong: function () {
+      if (this.$store.state.playIndex === 0) {
+        this.$store.state.playIndex = this.$store.state.songList.length - 1;
+        this.axios.get('http://localhost:3000/music/url?id=' + this.$store.state.songList[this.$store.state.songList.length - 1].id).then(res => {
+          this.$store.state.mp3Url = res.data.data[0].url;
+          this.$store.state.playIndex = this.$store.state.songList.length - 1;
+        });
+      } else {
+        this.axios.get('http://localhost:3000/music/url?id=' + this.$store.state.songList[this.$store.state.playIndex - 1].id).then(res => {
+          this.$store.state.mp3Url = res.data.data[0].url;
+          this.$store.state.playIndex--;
+        });
+      }
+    },
     volumeControl: function () {
       if (this.viconText === 'volume_up') {
         this.viconText = 'volume_off';
@@ -170,9 +199,7 @@ export default {
     },
     ended: function () {
       clearInterval(this.update);
-      this.iconText = 'play_circle_outline';
-      this.playText = '播放';
-      this.$refs.player.pause();
+      this.nextSong();
       this.progress = 0;
     },
     showList: function () {
@@ -184,6 +211,7 @@ export default {
     changeUrl: function (index) {
       this.axios.get('http://localhost:3000/music/url?id=' + this.$store.state.songList[index].id).then(res => {
         this.$store.state.mp3Url = res.data.data[0].url;
+        this.$store.state.playIndex = index;
       });
     }
   },
@@ -198,6 +226,8 @@ export default {
         this.$store.state.showList = false;
       }
     });
+  },
+  computed: {
   },
   watch: {
     progress: function (newValue, oldValue) {

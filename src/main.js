@@ -41,6 +41,7 @@ const store = new Vuex.Store({
     singeractive: false,
     rankactive: false,
     mp3Url: '',
+    playIndex: '',
     songList: [{
       name: 'The Beautiful People',
       id: '21256392',
@@ -72,7 +73,8 @@ const store = new Vuex.Store({
     },
     addSong: (state, obj) => {
       for (let item in state.songList) {
-        if (state.songList[item].name === obj.name && state.songList[item].arname === obj.arname) {
+        if (state.songList[item].id === obj.id) {
+          state.songList.splice(item, 1, obj);
           return;
         }
       }
