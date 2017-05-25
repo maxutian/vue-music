@@ -12,8 +12,8 @@
         <md-tooltip md-direction="top">上一首</md-tooltip>
       </button>
       <button @click="playControl()" class="play-pause">
-        <i class="material-icons" id="play-pause-icon">{{iconText}}</i>
-        <md-tooltip md-direction="top" id="play-pause-text">{{playText}}</md-tooltip>
+        <i class="material-icons" id="play-pause-icon">{{this.$store.state.iconText}}</i>
+        <md-tooltip md-direction="top" id="play-pause-text">{{this.$store.state.playText}}</md-tooltip>
       </button>
       <button @click="nextSong()" class="v-player-next">
         <i class="material-icons" id="next">skip_next</i>
@@ -98,9 +98,6 @@ export default {
   },
   data () {
     return {
-      iconText: 'pause_circle_outline',
-      playText: '暂停',
-      isPlay: false,
       duration: {
         tooltip: false,
         min: 0,
@@ -149,15 +146,11 @@ export default {
     },
     playControl: function () {
       if (this.$store.state.isPlaying) {
-        this.iconText = 'play_circle_outline';
-        this.playText = '播放';
-        this.$refs.player.pause();
         this.$store.commit('pauseMusic');
+        this.$refs.player.pause();
       } else {
-        this.iconText = 'pause_circle_outline';
-        this.playText = '暂停';
-        this.$refs.player.play();
         this.$store.commit('playMusic');
+        this.$refs.player.play();
       }
     },
     nextSong: function () {

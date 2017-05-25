@@ -27,7 +27,7 @@
       <template>
         <md-list-item v-for="(item, index) in details" :key="item.id" 
                       class="v-detail-items" 
-                      @click.native="changeList(index), changeUrl(index)">
+                      @click.native="changeIcon(), changeUrl(index)">
           <md-ink-ripple />
           <md-icon class="v-detail-icon">play_arrow</md-icon>
           <div><span style="color: #e9382a;font-weight: 500;">{{item.name}}</span> / {{item.arname}}</div>
@@ -57,8 +57,8 @@
       showContent: function () {
         this.isloading = false;
       },
-      changeList: function (index) {
-        this.$store.commit('addSong', this.details[index]);
+      changeIcon: function () {
+        this.$store.commit('playMusic');
       },
       changeUrl: function (index) {
         this.axios.get('http://localhost:3000/music/url?id=' + this.details[index].id).then(res => {
@@ -66,6 +66,7 @@
             alert('Sorry,该音乐暂时无法播放');
             return;
           }
+          this.$store.commit('addSong', this.details[index]);
           this.$store.state.mp3Url = res.data.data[0].url;
           this.$store.state.playIndex = 0;
         });

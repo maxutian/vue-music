@@ -36,6 +36,8 @@ Vue.material.registerTheme({
 const store = new Vuex.Store({
   state: {
     isPlaying: true,
+    iconText: 'pause_circle_outline',
+    playText: '暂停',
     showList: false,
     listactive: true,
     singeractive: false,
@@ -52,9 +54,13 @@ const store = new Vuex.Store({
   mutations: {
     playMusic: state => {
       state.isPlaying = true;
+      state.iconText = 'pause_circle_outline';
+      state.playText = '暂停';
     },
     pauseMusic: state => {
       state.isPlaying = false;
+      state.iconText = 'play_circle_outline';
+      state.playText = '播放';
     },
     listActive: state => {
       state.listactive = true;
