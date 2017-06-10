@@ -66,6 +66,13 @@
             alert('Sorry,该音乐暂时无法播放');
             return;
           }
+          for (let item in this.$store.state.songList) {
+            if (this.$store.state.songList[item].id === this.details[index].id) {
+              this.$store.state.playIndex = parseInt(item);
+              this.$store.state.mp3Url = res.data.data[0].url;
+              return;
+            }
+          }
           this.$store.commit('addSong', this.details[index]);
           this.$store.state.mp3Url = res.data.data[0].url;
           this.$store.state.playIndex = 0;
@@ -73,7 +80,7 @@
       }
     },
     mounted () {
-      setTimeout(this.showContent, 2300);
+      setTimeout(this.showContent, 2000);
       this.details = [];
       this.axios.get('http://localhost:3000/playlist/detail?id=' + this.$route.query.id).then(res => {
         this.avatarUrl = res.data.playlist.creator.avatarUrl;

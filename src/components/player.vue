@@ -44,7 +44,9 @@
     <div ref="listbody">
 
       <button class="v-playlist-button" @click="showList()">
-        <i class="material-icons" style="font-size: 2.5em;margin-left: 5px;margin-top: 3px;">playlist_play</i>
+        <i class="material-icons" style="font-size: 2.5em;margin-left: 5px;margin-top: 3px;">
+          playlist_play
+        </i>
         <md-tooltip md-direction="top">播放列表</md-tooltip>
       </button>
 
@@ -162,8 +164,8 @@ export default {
         });
       } else {
         this.axios.get('http://localhost:3000/music/url?id=' + this.$store.state.songList[this.$store.state.playIndex + 1].id).then(res => {
-          this.$store.state.mp3Url = res.data.data[0].url;
           this.$store.state.playIndex++;
+          this.$store.state.mp3Url = res.data.data[0].url;
         });
       }
     },
@@ -176,8 +178,8 @@ export default {
         });
       } else {
         this.axios.get('http://localhost:3000/music/url?id=' + this.$store.state.songList[this.$store.state.playIndex - 1].id).then(res => {
-          this.$store.state.mp3Url = res.data.data[0].url;
           this.$store.state.playIndex--;
+          this.$store.state.mp3Url = res.data.data[0].url;
         });
       }
     },

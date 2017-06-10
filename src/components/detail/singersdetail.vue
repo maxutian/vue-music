@@ -63,6 +63,13 @@
             alert('Sorry,该音乐暂时无法播放');
             return;
           }
+          for (let item in this.$store.state.songList) {
+            if (this.$store.state.songList[item].id === this.singerdetails[index].id) {
+              this.$store.state.playIndex = parseInt(item);
+              this.$store.state.mp3Url = res.data.data[0].url;
+              return;
+            }
+          }
           this.$store.commit('addSong', this.singerdetails[index]);
           this.$store.state.mp3Url = res.data.data[0].url;
           this.$store.state.playIndex = 0;

@@ -1,5 +1,9 @@
 <template>
   <div id="v-tabbar">
+    <button id="goback" @click="goBack()">
+      <i class="material-icons"><md-ink-ripple/>arrow_back</i>
+      <md-tooltip md-direction="bottom">返回</md-tooltip>
+    </button>
     <md-button id="choice-1" @click.native="$router.push('/'),listActive()">
       <div :class="{'v-tabbar-active': this.$store.state.listactive}">歌单</div>
     </md-button>
@@ -24,6 +28,9 @@ export default {
     },
     rankActive: function () {
       this.$store.commit('rankActive');
+    },
+    goBack: function () {
+      this.$router.go(-1);
     }
   }
 };
@@ -53,8 +60,24 @@ export default {
   text-align: center;
   line-height: 48px;
 }
+#goback{
+  z-index: 999;
+  cursor: pointer;
+  position: fixed;
+  top: 85px;
+  left: 2%;
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 3px;
+  background-color: transparent;
+  transition: all .3s ease;
+}
+#goback:hover{
+  background-color: rgba(200,200,200,.6);
+  transition: all .3s ease;
+}
 .v-tabbar-active{
-  width: ;
   height: 48px;
   color: #e9382a;
   font-size: 1.2em;

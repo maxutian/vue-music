@@ -43,7 +43,7 @@ const store = new Vuex.Store({
     singeractive: false,
     rankactive: false,
     mp3Url: '',
-    playIndex: '',
+    playIndex: 0,
     songList: [{
       name: 'The Beautiful People',
       id: '21256392',
