@@ -32,7 +32,7 @@ export default {
   },
   mounted () {
     this.songlists = [];
-    this.axios.get('http://localhost:3000/top/playlist/highquality?limit=9').then(res => {
+    this.axios.get('http://maxutian.cn:3000/top/playlist/highquality?limit=9').then(res => {
       res.data.playlists.forEach(item => {
         let obj = {
           name: item.name,

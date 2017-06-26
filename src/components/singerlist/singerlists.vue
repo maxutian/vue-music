@@ -27,7 +27,7 @@
     },
     mounted () {
       this.singerlists = [];
-      this.axios.get('http://localhost:3000/top/artists?limit=9').then(res => {
+      this.axios.get('http://maxutian.cn:3000/top/artists?limit=9').then(res => {
         res.data.artists.forEach(item => {
           let obj = {
             name: item.name,

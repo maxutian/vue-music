@@ -158,12 +158,12 @@ export default {
     nextSong: function () {
       if (this.$store.state.playIndex === this.$store.state.songList.length - 1) {
         this.$store.state.playIndex = 0;
-        this.axios.get('http://localhost:3000/music/url?id=' + this.$store.state.songList[0].id).then(res => {
+        this.axios.get('http://maxutian.cn:3000/music/url?id=' + this.$store.state.songList[0].id).then(res => {
           this.$store.state.mp3Url = res.data.data[0].url;
           this.$store.state.playIndex = 0;
         });
       } else {
-        this.axios.get('http://localhost:3000/music/url?id=' + this.$store.state.songList[this.$store.state.playIndex + 1].id).then(res => {
+        this.axios.get('http://maxutian.cn:3000/music/url?id=' + this.$store.state.songList[this.$store.state.playIndex + 1].id).then(res => {
           this.$store.state.playIndex++;
           this.$store.state.mp3Url = res.data.data[0].url;
         });
@@ -172,12 +172,12 @@ export default {
     preSong: function () {
       if (this.$store.state.playIndex === 0) {
         this.$store.state.playIndex = this.$store.state.songList.length - 1;
-        this.axios.get('http://localhost:3000/music/url?id=' + this.$store.state.songList[this.$store.state.songList.length - 1].id).then(res => {
+        this.axios.get('http://maxutian.cn:3000/music/url?id=' + this.$store.state.songList[this.$store.state.songList.length - 1].id).then(res => {
           this.$store.state.mp3Url = res.data.data[0].url;
           this.$store.state.playIndex = this.$store.state.songList.length - 1;
         });
       } else {
-        this.axios.get('http://localhost:3000/music/url?id=' + this.$store.state.songList[this.$store.state.playIndex - 1].id).then(res => {
+        this.axios.get('http://maxutian.cn:3000/music/url?id=' + this.$store.state.songList[this.$store.state.playIndex - 1].id).then(res => {
           this.$store.state.playIndex--;
           this.$store.state.mp3Url = res.data.data[0].url;
         });
@@ -204,14 +204,14 @@ export default {
       this.$store.commit('clearList');
     },
     changeUrl: function (index) {
-      this.axios.get('http://localhost:3000/music/url?id=' + this.$store.state.songList[index].id).then(res => {
+      this.axios.get('http://maxutian.cn:3000/music/url?id=' + this.$store.state.songList[index].id).then(res => {
         this.$store.state.mp3Url = res.data.data[0].url;
         this.$store.state.playIndex = index;
       });
     }
   },
   mounted: function () {
-    this.axios.get('http://localhost:3000/music/url?id=' + this.$store.state.songList[0].id).then(res => {
+    this.axios.get('http://maxutian.cn:3000/music/url?id=' + this.$store.state.songList[0].id).then(res => {
       this.$store.state.mp3Url = res.data.data[0].url;
     });
     document.addEventListener('click', (e) => {

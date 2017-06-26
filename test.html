@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		ul{
+			list-style: none;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+<ul id="test">
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+</ul>
+<script>
+var ul = document.getElementById('test');
+for (var i = 1;i <= 5;i++){
+	for (var j = 1;j <= i;j++){
+		var t = document.createTextNode('*' + ' ');
+		test.children[i].appendChild(t);
+	}
+}
+
+</script>
+</body>
+</html>

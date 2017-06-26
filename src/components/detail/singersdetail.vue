@@ -58,7 +58,7 @@
         this.$store.commit('playMusic');
       },
       changeUrl: function (index) {
-        this.axios.get('http://localhost:3000/music/url?id=' + this.singerdetails[index].id).then(res => {
+        this.axios.get('http://maxutian.cn:3000/music/url?id=' + this.singerdetails[index].id).then(res => {
           if (res.data.data[0].url === null) {
             alert('Sorry,该音乐暂时无法播放');
             return;
@@ -79,7 +79,7 @@
     mounted () {
       setTimeout(this.showContent, 600);
       this.singerdetails = [];
-      this.axios.get('http://localhost:3000/artists?id=' + this.$route.query.id).then(res => {
+      this.axios.get('http://maxutian.cn:3000/artists?id=' + this.$route.query.id).then(res => {
         this.singerUrl = res.data.artist.picUrl;
         this.singerName = res.data.artist.name;
         this.alias = res.data.artist.alias[0];

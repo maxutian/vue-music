@@ -58,7 +58,7 @@ export default {
       this.$store.commit('playMusic');
     },
     changeUrl: function (index) {
-      this.axios.get('http://localhost:3000/music/url?id=' + this.rankdetails[index].id).then(res => {
+      this.axios.get('http://maxutian.cn:3000/music/url?id=' + this.rankdetails[index].id).then(res => {
         if (res.data.data[0].url === null) {
           alert('Sorry,该音乐暂时无法播放');
           return;
@@ -79,7 +79,7 @@ export default {
   mounted () {
     setTimeout(this.showContent, 600);
     this.rankdetails = [];
-    this.axios.get('http://localhost:3000/top/list?idx=6').then(res => {
+    this.axios.get('http://maxutian.cn:3000/top/list?idx=6').then(res => {
       this.avatarUrl = res.data.result.creator.avatarUrl;
       this.nickname = res.data.result.creator.nickname;
       this.signature = res.data.result.creator.signature;
