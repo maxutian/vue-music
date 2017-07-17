@@ -9,15 +9,12 @@
     <div id="v-player-control">
       <button @click="preSong()" class="v-player-pre">
         <i class="material-icons" id="previous">skip_previous</i>
-        <md-tooltip md-direction="top">上一首</md-tooltip>
       </button>
       <button @click="playControl()" class="play-pause">
         <i class="material-icons" id="play-pause-icon">{{this.$store.state.iconText}}</i>
-        <md-tooltip md-direction="top" id="play-pause-text">{{this.$store.state.playText}}</md-tooltip>
       </button>
       <button @click="nextSong()" class="v-player-next">
         <i class="material-icons" id="next">skip_next</i>
-        <md-tooltip md-direction="top">下一首</md-tooltip>
       </button>
     </div>
 
@@ -33,7 +30,6 @@
     </div>
     <button @click="volumeControl" class="v-player-voice" style="margin-left: 1%;">
       <i class="material-icons" id="voice">{{viconText}}</i>
-      <md-tooltip md-direction="top">音量/静音</md-tooltip>
     </button>
     <div id="volume-duration">
       <vue-slider v-bind="volumeProgress" v-model="volume"></vue-slider>
@@ -47,7 +43,6 @@
         <i class="material-icons" style="font-size: 2.5em;margin-left: 5px;margin-top: 3px;">
           playlist_play
         </i>
-        <md-tooltip md-direction="top">播放列表</md-tooltip>
       </button>
 
       <div class="v-playlist-body">
@@ -243,7 +238,7 @@ export default {
   transition: all .3s ease-out;
 }
 #v-player-container{
-  z-index: 2;
+  z-index: 999;
   display: flex;
   flex-flow: row wrap;
   align-items: center;
@@ -364,6 +359,7 @@ export default {
 }
 .v-playlist-items{
   width: 98%;
+  list-style: none;
 }
 .v-playlist-playing{
   background-color: rgba(5,5,5,.1) !important;

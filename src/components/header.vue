@@ -35,7 +35,7 @@ export default {
 
 <style>
   #header-container{
-    z-index: 3;
+    z-index: 999;
     position: fixed;
     left: 0;
     top: 0;

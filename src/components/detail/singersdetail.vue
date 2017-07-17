@@ -1,5 +1,5 @@
 <template>
-  <md-list id="v-singerdetail-container">
+  <div class="singerlistsdetail-container">
     <transition name="loadAnimation">
       <div class="animation-container" v-if="isloading">
         <div class="dots-container">
@@ -9,7 +9,7 @@
         </div>
       </div>
     </transition>
-    <div class="detail-header">
+    <div class="v-singerdetail-header">
       <div>
         <img :src="singerUrl" class="v-detail-avatarUrl">
       </div>
@@ -20,7 +20,16 @@
         <span>{{alias}}</span>
       </div>
     </div>
-    <div style="margin-top: 10px">
+    <div class="v-singerdetail-funcArea">
+      <md-button class="playAllBtn" @click.native="playAll">
+        <md-icon>play_circle_outline</md-icon>
+        <div style="width: 10px;"></div>
+        <p style="font-weight: 600;">播放全部</p>
+      </md-button>
+
+      <div class="songCount">共<p>{{singerdetails.length}}</p>首</div>
+    </div>
+    <md-list class="v-singerdetail-content">
       <template>
         <md-list-item v-for="(item, index) in singerdetails" :key="item.id" 
                       class="v-detail-items" 
@@ -32,8 +41,8 @@
           <md-divider class="md-inset"></md-divider>
         </md-list-item>
       </template>
-    </div>
-  </md-list>
+    </md-list>
+  </div>
 </template>
 
 <script>
@@ -51,6 +60,17 @@
       };
     },
     methods: {
+      playAll: function () {
+        this.$store.commit('clearList');
+        for (let item in this.singerdetails) {
+          this.$store.commit('pushSong', this.singerdetails[item]);
+        }
+        this.axios.get('http://maxutian.cn:3000/music/url?id=' + this.$store.state.songList[0].id).then(res => {
+          this.$store.state.mp3Url = res.data.data[0].url;
+          this.$store.state.playIndex = 0;
+          this.$store.commit('playMusic');
+        });
+      },
       showContent: function () {
         this.isloading = false;
       },
@@ -98,30 +118,50 @@
 </script>
 
 <style>
-  #v-singerdetail-container{
+  .v-singerdetail-header{
     z-index: 1;
     position: relative;
     width: 50%;
     margin: 0 auto;
     margin-top: 230px;
-    margin-bottom: 120px;
-    padding-top: 0;
-    padding-bottom: 30px;
-    padding-right: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.2), 0 1px 1px rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
+  }
+  .v-singerdetail-funcArea{
+    z-index: 1;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 10px;
+  }
+  .md-button{
+    margin: 0 !important;
+  }
+  .playAllBtn{
+    display: flex !important;
+    flex-flow: row;
+    font-size: 1.1em;
+  }
+  .songCount{
+    display: flex;
+    flex-flow: row;
+    margin-right: 2%;
+    font-size: 1.1em;
+    font-weight: 600;
+  }
+  .v-singerdetail-content{
+    z-index: 1;
+    position: relative;
+    width: 50%;
+    margin: 0 auto !important;
+    margin-top: 5px !important;
+    margin-bottom: 120px !important;
+    padding-top: 0 !important;
+    padding-bottom: 30px !important;
+    padding-right: 5px !important;
     box-shadow: 0 1px 5px rgba(0,0,0,.2), 0 2px 2px rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.12);
-  }
-  .v-detail-singername{
-    position: absolute;
-    top: 30px;
-    left: 280px;
-    font-weight: 500;
-    font-size: 2.5em;
-  }
-  .v-detail-alias{
-    position: absolute;
-    top: 70px;
-    left: 285px;
-    font-weight: 300;
-    font-size: 1.3em;
   }
 </style>

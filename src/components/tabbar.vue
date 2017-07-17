@@ -38,7 +38,7 @@ export default {
 
 <style>
 #v-tabbar{
-  z-index: 3;
+  z-index: 999;
   display: flex;
   justify-content: center;
   position: fixed;
