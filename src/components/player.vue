@@ -60,7 +60,7 @@
                 <i class="material-icons" style="font-size: 1.8em;">delete_sweep</i>
               </button>
               <div class="v-playlist-title">
-                <span>播放列表</span>
+                <span style="font-weight: 700">播放列表</span>
               </div>
               <button class="v-playlist-close" style="margin-right: 5px;" @click="showList()">
                 <i class="material-icons" style="font-size: 1em;margin-top: 3px;">close</i>
@@ -69,16 +69,14 @@
             
             <div style="width:100%; height: 15px;"></div>
 
-            <div style="margin-top: 50px;">
-              <md-list v-for="(item, index) in this.$store.state.songList" :key="item.id" @click.native="changeUrl(index)">
-                <md-list-item class="v-detail-items v-playlist-items">
-                  <md-ink-ripple />
-                  <md-icon class="v-detail-icon">play_arrow</md-icon>
-                  <div><span style="color: #e9382a;font-weight: 500;">{{item.name}}</span> / {{item.arname}}</div>
-                  <div>{{item.duration}}</div>
-                  <md-divider class="md-inset"></md-divider>
-                </md-list-item>
-              </md-list>
+            <div style="margin-top: 40px;">
+              <md-list-item v-for="(item, index) in this.$store.state.songList" :key="item.id" @click.native="changeUrl(index)" class="v-detail-items v-playlist-items">
+                <md-ink-ripple />
+                <md-icon class="v-detail-icon">play_arrow</md-icon>
+                <div><span style="color: #e9382a;font-weight: 500;">{{item.name}}</span> / {{item.arname}}</div>
+                <div>{{item.duration}}</div>
+                <md-divider class="md-inset"></md-divider>
+              </md-list-item>
             </div>
           </div>
 
@@ -173,8 +171,8 @@ export default {
       if (this.$store.state.playIndex === 0) {
         this.$store.state.playIndex = this.$store.state.songList.length - 1;
         this.axios.get('http://maxutian.cn:3000/music/url?id=' + this.$store.state.songList[this.$store.state.songList.length - 1].id).then(res => {
-          this.$store.state.mp3Url = res.data.data[0].url;
           this.$store.state.playIndex = this.$store.state.songList.length - 1;
+          this.$store.state.mp3Url = res.data.data[0].url;
         });
       } else {
         this.axios.get('http://maxutian.cn:3000/music/url?id=' + this.$store.state.songList[this.$store.state.playIndex - 1].id).then(res => {
@@ -207,6 +205,7 @@ export default {
       this.axios.get('http://maxutian.cn:3000/music/url?id=' + this.$store.state.songList[index].id).then(res => {
         this.$store.state.mp3Url = res.data.data[0].url;
         this.$store.state.playIndex = index;
+        this.$store.commit('playMusic');
       });
     }
   },
@@ -365,7 +364,9 @@ export default {
 }
 .v-playlist-items{
   width: 98%;
-  margin-top: -13px;
+}
+.v-playlist-playing{
+  background-color: rgba(5,5,5,.1) !important;
 }
 .showlist-enter,.showlist-leave-active{
   opacity: 0;

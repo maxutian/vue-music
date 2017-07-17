@@ -4,7 +4,7 @@
       <md-card id="v-songlist-hover" class="v-songlist-ele">
         <md-card-media-cover md-solid>
           <md-card-media md-ratio="1:1">
-            <img :src="item.imgUrl" 
+            <img src="../../assets/img_load_fail.png" height="420" width="420" 
                  @click="$router.push({name: 'songlistsdetail', query: {id: item.id}})" 
                  style="cursor: pointer;">
           </md-card-media>
@@ -78,7 +78,15 @@ export default {
     margin-bottom: 3%;
     margin-right: 3%;
   }
+  @media(max-width: 1500px){
+    #v-songlists-body{
+      width: 70%;
+    }
+  }
   @media(max-width: 1000px){
+    #v-songlists-body{
+      width: 70%;
+    }
     .v-songlist-ele{
       width: 45%;
       margin-bottom: 5%;

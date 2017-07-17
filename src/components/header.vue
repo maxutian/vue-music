@@ -1,6 +1,7 @@
 <template>
   <div id="header-container">
     <md-toolbar>
+
       <h2 class="md-title header-title" 
           @click="$router.push('/'),test()" 
           style="cursor: pointer">Vue Music</h2>

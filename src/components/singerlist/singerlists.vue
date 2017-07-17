@@ -4,7 +4,7 @@
       <md-card id="v-singerlist-hover" class="v-singerlist-ele" >
         <md-card-media-cover md-solid>
           <md-card-media md-ratio="1:1">
-            <img :src="item.imgUrl" alt="Skyscraper" @click="$router.push({name: 'singersdetail', query: {id: item.id}})" style="cursor: pointer;">
+            <img src="../../assets/img_load_fail.png" height="420" width="420" alt="Skyscraper" @click="$router.push({name: 'singersdetail', query: {id: item.id}})" style="cursor: pointer;">
           </md-card-media>
           <md-card-area>
             <md-card-header>
@@ -65,7 +65,15 @@
     margin-bottom: 3%;
     margin-right: 3%;
   }
+  @media(max-width: 1500px){
+    #v-singerlists-body{
+      width: 70%;
+    }
+  }
   @media(max-width: 1000px){
+    #v-singerlists-body{
+      width: 70%;
+    }
     .v-singerlist-ele{
       width: 45%;
       margin-bottom: 5%;

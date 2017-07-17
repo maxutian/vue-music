@@ -4,14 +4,14 @@
       <i class="material-icons"><md-ink-ripple/>arrow_back</i>
       <md-tooltip md-direction="bottom">返回</md-tooltip>
     </button>
-    <md-button id="choice-1" @click.native="$router.push('/'),listActive()">
-      <div :class="{'v-tabbar-active': this.$store.state.listactive}">歌单</div>
+    <md-button class="v-tab" @click.native="$router.push('/'),listActive()">
+      <div :class="{'v-tabbar-active': this.$store.state.tabbarIndex === 0}">歌单</div>
     </md-button>
-    <md-button id="choice-2" @click.native="$router.push('singerlists'),singerActive()">
-      <div :class="{'v-tabbar-active': this.$store.state.singeractive}">歌手</div>
+    <md-button class="v-tab" @click.native="$router.push('singerlists'),singerActive()">
+      <div :class="{'v-tabbar-active': this.$store.state.tabbarIndex === 1}">歌手</div>
     </md-button>
-    <md-button id="choice-3" @click.native="$router.push('ranks'),rankActive()">
-      <div :class="{'v-tabbar-active': this.$store.state.rankactive}">排行榜</div>
+    <md-button class="v-tab" @click.native="$router.push('ranks'),rankActive()">
+      <div :class="{'v-tabbar-active': this.$store.state.tabbarIndex === 2}">排行榜</div>
     </md-button>
   </div>
 </template>
@@ -50,11 +50,11 @@ export default {
   background-color: #fff;
   box-shadow: 0 1px 5px rgba(0,0,0,.2), 0 2px 2px rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.12);
 }
-#choice-1,#choice-2,#choice-3{
+.v-tab{
   width: 15%;
   height: 48px;
-  margin: 0;
-  padding: 0;
+  margin: 0 !important;
+  padding: 0 !important;
   font-size: 1.1em;
   font-weight: 500;
   text-align: center;
@@ -80,6 +80,7 @@ export default {
 .v-tabbar-active{
   height: 48px;
   color: #e9382a;
+  padding-top: 3px !important;
   font-size: 1.2em;
   font-weight: 600;
   border-bottom: 3px solid #e9382a;

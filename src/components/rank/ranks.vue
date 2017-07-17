@@ -3,7 +3,7 @@
     <md-card id="v-rank-hover" class="v-rank-ele" @click.native="$router.push('ranksdetail')">
       <md-card-media-cover md-solid>
         <md-card-media md-ratio="3:1">
-          <img src="../../assets/billboard-logo.jpg" height="750" width="2818" alt="Skyscraper">
+          <img src="../../assets/billboard-logo.jpg" height="750" width="2818">
         </md-card-media>
         <md-card-area>
           <md-card-header>
@@ -16,7 +16,7 @@
 </template>
 
 <script>
- 
+
 </script>
 
 <style>
