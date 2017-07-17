@@ -1,6 +1,6 @@
 <template>
-  <md-list id="v-songdetail-container">
-    <div style="margin-top: 10px;">
+  <md-list id="v-songdetailSong-container">
+    <div>
       <template>
         <md-list-item v-for="(item, index) in details" :key="item.id" 
                       class="v-detail-items" 
@@ -74,7 +74,7 @@
 </script>
 
 <style scoped>
-  #v-songdetail-container{
+  #v-songdetailSong-container{
     z-index: 1;
     position: relative;
     width: 50%;
