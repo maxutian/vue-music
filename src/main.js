@@ -39,9 +39,7 @@ const store = new Vuex.Store({
     iconText: 'pause_circle_outline',
     playText: '暂停',
     showList: false,
-    listactive: true,
-    singeractive: false,
-    rankactive: false,
+    tabbarIndex: 0,
     mp3Url: '',
     playIndex: 0,
     songList: [{
@@ -63,19 +61,13 @@ const store = new Vuex.Store({
       state.playText = '播放';
     },
     listActive: state => {
-      state.listactive = true;
-      state.singeractive = false;
-      state.rankactive = false;
+      state.tabbarIndex = 0;
     },
     singerActive: state => {
-      state.listactive = false;
-      state.singeractive = true;
-      state.rankactive = false;
+      state.tabbarIndex = 1;
     },
     rankActive: state => {
-      state.listactive = false;
-      state.singeractive = false;
-      state.rankactive = true;
+      state.tabbarIndex = 2;
     },
     addSong: (state, obj) => {
       for (let item in state.songList) {
@@ -85,6 +77,9 @@ const store = new Vuex.Store({
         }
       }
       state.songList.unshift(obj);
+    },
+    pushSong: (state, obj) => {
+      state.songList.push(obj);
     },
     clearList: state => {
       state.songList = [];

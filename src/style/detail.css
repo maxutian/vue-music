@@ -1,7 +1,6 @@
-  .detail-header{
-    width: 100.5%;
-    padding-bottom: 1px;
-    box-shadow: 0 1px 3px rgba(0,0,0,.2), 0 1px 1px rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
+  *{
+    margin: 0;
+    padding: 0;
   }
   .v-detail-avatarUrl {
     width: 250px;
@@ -16,20 +15,20 @@
     font-weight: 400;
     font-size: 1.3em;
   }
-  .v-detail-nickname{
+  .v-detail-nickname, .v-detail-singername{
     position: absolute;
     top: 60px;
     left: 320px;
     font-weight: 500;
     font-size: 2.2em;
   }
-  .v-detail-signature{
+  .v-detail-signature, .v-detail-alias{
     position: absolute;
     top: 90px;
     left: 320px;
     font-weight: 400;
-    font-size: 1.2em;
-    width: 35%;
+    font-size: 1.1em;
+    width: 60%;
   }
   .v-detail-items{
     cursor: pointer;
@@ -44,4 +43,5 @@
   .md-divider{
     margin-left: 20px !important;
   }
+  
   
