@@ -17,6 +17,7 @@
     "vue": "^2.2.2",
     "vue-axios": "^2.0.2",
     "vue-material": "^0.7.1",
+    "vue-progressive-image": "^2.0.0",
     "vue-router": "^2.2.0",
     "vue-slider": "^1.1.1",
     "vuex": "^2.3.1"

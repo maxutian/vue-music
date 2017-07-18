@@ -7,6 +7,7 @@ import Vuex from 'vuex';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 import VueMaterial from 'vue-material';
+import VueProgressiveImage from 'vue-progressive-image';
 import './filters';
 import './style/detail.css';
 import './style/animation.css';
@@ -17,6 +18,7 @@ Vue.config.productionTip = false;
 Vue.use(VueMaterial);
 Vue.use(Vuex);
 Vue.use(VueAxios, axios);
+Vue.use(VueProgressiveImage);
 
 // use&config VueMaterial
 Vue.material.registerTheme({

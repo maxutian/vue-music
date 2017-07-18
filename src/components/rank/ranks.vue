@@ -2,9 +2,7 @@
   <div id="v-ranks-body">
     <md-card id="v-rank-hover" class="v-rank-ele" @click.native="$router.push('ranksdetail')">
       <md-card-media-cover md-solid>
-        <md-card-media md-ratio="3:1">
-          <img src="../../assets/billboard-logo.jpg" height="750" width="2818">
-        </md-card-media>
+        <progressive-img src="https://www.tuchuang001.com/images/2017/06/10/billboard-logo.jpg" style="cursor: pointer"/>
         <md-card-area>
           <md-card-header>
             <div class="md-title">Billborad公告牌</div>

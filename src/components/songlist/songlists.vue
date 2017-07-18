@@ -2,12 +2,8 @@
   <div id="v-songlists-body">
     <template v-for="item in songlists">
       <md-card id="v-songlist-hover" class="v-songlist-ele">
-        <md-card-media-cover md-solid>
-          <md-card-media md-ratio="1:1">
-            <img src="../../assets/img_load_fail.png" height="420" width="420" 
-                 @click="$router.push({name: 'songlistsdetail', query: {id: item.id}})" 
-                 style="cursor: pointer;">
-          </md-card-media>
+        <md-card-media-cover md-solid @click.native="$router.push({name: 'songlistsdetail', query: {id: item.id}})">
+          <progressive-img :src="item.imgUrl" style="cursor: pointer"/>
           <md-card-area style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
             <md-card-header>
               <span class="songlists-title" @click="$router.push({name: 'songlistsdetail', query: {id: item.id}})" style="cursor: pointer;">{{item.name}}</span>
