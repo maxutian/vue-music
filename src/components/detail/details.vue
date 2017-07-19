@@ -13,7 +13,7 @@
       <div>
         <img :src="avatarUrl" class="v-detail-avatarUrl">
       </div>
-      <div class="creator" v-if="this.$route.params === 0">
+      <div class="creator" v-if="this.$route.params.id === 0">
         <span>Created By :</span>
       </div>
       <div class="v-detail-nickname">
@@ -100,9 +100,9 @@
       }
     },
     mounted () {
-      setTimeout(this.showContent, 2000);
       this.details = [];
       if (this.$route.params.id === 0) {
+        setTimeout(this.showContent, 2000);
         this.axios.get('http://maxutian.cn:3000/playlist/detail?id=' + this.$route.query.id).then(res => {
           this.avatarUrl = res.data.playlist.creator.avatarUrl;
           this.nickname = res.data.playlist.creator.nickname;
@@ -118,6 +118,7 @@
           });
         });
       } else if (this.$route.params.id === 1) {
+        setTimeout(this.showContent, 1000);
         this.axios.get('http://maxutian.cn:3000/artists?id=' + this.$route.query.id).then(res => {
           this.avatarUrl = res.data.artist.picUrl;
           this.nickname = res.data.artist.name;
@@ -133,6 +134,7 @@
           });
         });
       } else if (this.$route.params.id === 2) {
+        setTimeout(this.showContent, 1000);
         this.axios.get('http://maxutian.cn:3000/top/list?idx=6').then(res => {
           this.avatarUrl = res.data.result.creator.avatarUrl;
           this.nickname = res.data.result.creator.nickname;
