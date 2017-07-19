@@ -3,9 +3,7 @@ import Router from 'vue-router';
 import songlists from '../components/songlist/songlists';
 import singerlists from '../components/singerlist/singerlists';
 import ranks from '../components/rank/ranks';
-import songlistsdetail from '../components/detail/songlistsdetail';
-import singersdetail from '../components/detail/singersdetail';
-import ranksdetail from '../components/detail/ranksdetail';
+import details from '../components/detail/details';
 
 Vue.use(Router);
 
@@ -27,19 +25,9 @@ export default new Router({
       component: ranks
     },
     {
-      path: '/songlistsdetail',
-      name: 'songlistsdetail',
-      component: songlistsdetail
-    },
-    {
-      path: '/singersdetail',
-      name: 'singersdetail',
-      component: singersdetail
-    },
-    {
-      path: '/ranksdetail',
-      name: 'ranksdetail',
-      component: ranksdetail
+      path: '/details',
+      name: 'details',
+      component: details
     }
   ]
 });

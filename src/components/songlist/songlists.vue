@@ -2,11 +2,11 @@
   <div id="v-songlists-body">
     <template v-for="item in songlists">
       <md-card id="v-songlist-hover" class="v-songlist-ele">
-        <md-card-media-cover md-solid @click.native="$router.push({name: 'songlistsdetail', query: {id: item.id}})">
+        <md-card-media-cover md-solid @click.native="$router.push({name: 'details', query: {id: item.id}, params: {id: 0}})">
           <progressive-img :src="item.imgUrl" style="cursor: pointer"/>
           <md-card-area style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
             <md-card-header>
-              <span class="songlists-title" @click="$router.push({name: 'songlistsdetail', query: {id: item.id}})" style="cursor: pointer;">{{item.name}}</span>
+              <span class="songlists-title" @click="$router.push({name: 'details', query: {id: item.id}, params: {id: 0}})" style="cursor: pointer;">{{item.name}}</span>
               <div class="md-subhead">{{item.playCount}}次播放</div>
             </md-card-header>
           </md-card-area>
@@ -76,10 +76,10 @@ export default {
   }
   @media(max-width: 1500px){
     #v-songlists-body{
-      width: 70%;
+      width: 60%;
     }
   }
-  @media(max-width: 1000px){
+  @media(max-width: 1200px){
     #v-songlists-body{
       width: 70%;
     }

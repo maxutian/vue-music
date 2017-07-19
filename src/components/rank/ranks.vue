@@ -1,6 +1,6 @@
 <template>
   <div id="v-ranks-body">
-    <md-card id="v-rank-hover" class="v-rank-ele" @click.native="$router.push('ranksdetail')">
+    <md-card id="v-rank-hover" class="v-rank-ele" @click.native="$router.push({name: 'details', query: {id: 'billborad'}, params: {id: 2}})">
       <md-card-media-cover md-solid>
         <progressive-img src="https://www.tuchuang001.com/images/2017/06/10/billboard-logo.jpg" style="cursor: pointer"/>
         <md-card-area>

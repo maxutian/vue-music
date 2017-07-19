@@ -1,5 +1,5 @@
 <template>
-  <div class="songlistsdetail-container">
+  <div class="details-container">
     <transition name="loadAnimation">
       <div class="animation-container" v-if="isloading">
         <div class="dots-container">
@@ -13,7 +13,7 @@
       <div>
         <img :src="avatarUrl" class="v-detail-avatarUrl">
       </div>
-      <div class="creator">
+      <div class="creator" v-if="this.$route.params === 0">
         <span>Created By :</span>
       </div>
       <div class="v-detail-nickname">
@@ -52,7 +52,7 @@
   import Vue from 'vue';
 
   export default {
-    name: 'detail',
+    name: 'details',
     data () {
       return {
         details: [],
@@ -93,26 +93,63 @@
               return;
             }
           }
+          this.$store.commit('addSong', this.details[index]);
+          this.$store.state.mp3Url = res.data.data[0].url;
+          this.$store.state.playIndex = 0;
         });
       }
     },
     mounted () {
       setTimeout(this.showContent, 2000);
       this.details = [];
-      this.axios.get('http://maxutian.cn:3000/playlist/detail?id=' + this.$route.query.id).then(res => {
-        this.avatarUrl = res.data.playlist.creator.avatarUrl;
-        this.nickname = res.data.playlist.creator.nickname;
-        this.signature = res.data.playlist.creator.signature;
-        res.data.playlist.tracks.forEach(item => {
-          let obj = {
-            name: item.name,
-            id: item.id,
-            arname: item.ar[0].name,
-            duration: Vue.options.filters.timeToStr(item.dt / 1000)
-          };
-          this.details.push(obj);
+      if (this.$route.params.id === 0) {
+        this.axios.get('http://maxutian.cn:3000/playlist/detail?id=' + this.$route.query.id).then(res => {
+          this.avatarUrl = res.data.playlist.creator.avatarUrl;
+          this.nickname = res.data.playlist.creator.nickname;
+          this.signature = res.data.playlist.creator.signature;
+          res.data.playlist.tracks.forEach(item => {
+            let obj = {
+              name: item.name,
+              id: item.id,
+              arname: item.ar[0].name,
+              duration: Vue.options.filters.timeToStr(item.dt / 1000)
+            };
+            this.details.push(obj);
+          });
         });
-      });
+      } else if (this.$route.params.id === 1) {
+        this.axios.get('http://maxutian.cn:3000/artists?id=' + this.$route.query.id).then(res => {
+          this.avatarUrl = res.data.artist.picUrl;
+          this.nickname = res.data.artist.name;
+          this.signature = res.data.artist.alias[0];
+          res.data.hotSongs.forEach(item => {
+            let obj = {
+              name: item.name,
+              id: item.id,
+              arname: res.data.artist.name,
+              duration: Vue.options.filters.timeToStr(item.dt / 1000)
+            };
+            this.details.push(obj);
+          });
+        });
+      } else if (this.$route.params.id === 2) {
+        this.axios.get('http://maxutian.cn:3000/top/list?idx=6').then(res => {
+          this.avatarUrl = res.data.result.creator.avatarUrl;
+          this.nickname = res.data.result.creator.nickname;
+          this.signature = res.data.result.creator.signature;
+          res.data.result.tracks.forEach(item => {
+            let obj = {
+              name: item.name,
+              id: item.id,
+              arname: item.artists[0].name,
+              duration: Vue.options.filters.timeToStr(item.duration / 1000)
+            };
+            this.details.push(obj);
+          });
+        });
+      } else {
+        return;
+      }
     }
   };
 </script>

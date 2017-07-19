@@ -2,11 +2,11 @@
   <div id="v-singerlists-body">
     <template v-for="item in singerlists">
       <md-card id="v-singerlist-hover" class="v-singerlist-ele" >
-        <md-card-media-cover md-solid @click.native="$router.push({name: 'singersdetail', query: {id: item.id}})">
+        <md-card-media-cover md-solid @click.native="$router.push({name: 'details', query: {id: item.id}, params: {id: 1}})">
           <progressive-img :src="item.imgUrl" style="cursor: pointer"/>
           <md-card-area>
             <md-card-header>
-              <div class="md-title"><span @click="$router.push({name: 'singersdetail', query: {id: item.id}})" style="cursor: pointer;">{{item.name}}</span></div>
+              <div class="md-title"><span @click="$router.push({name: 'details', query: {id: item.id}, params: {id: 1}})" style="cursor: pointer;">{{item.name}}</span></div>
             </md-card-header>
           </md-card-area>
         </md-card-media-cover>
@@ -65,7 +65,7 @@
   }
   @media(max-width: 1500px){
     #v-singerlists-body{
-      width: 70%;
+      width: 60%;
     }
   }
   @media(max-width: 1000px){
