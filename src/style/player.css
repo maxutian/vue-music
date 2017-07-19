@@ -124,11 +124,12 @@
   transition: all .3s ease-out;
 }
 .v-playlist-items{
-  width: 98%;
+  width: 100%;
+  margin-left: 2px;
   list-style: none;
 }
 .v-playlist-playing{
-  background-color: rgba(5,5,5,.1) !important;
+  background-color: rgba(50,50,50,.2) !important;
 }
 .showlist-enter,.showlist-leave-active{
   opacity: 0;

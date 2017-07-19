@@ -64,9 +64,9 @@
             <div style="width:100%; height: 15px;"></div>
 
             <div style="margin-top: 40px;">
-              <md-list-item v-for="(item, index) in this.$store.state.songList" :key="item.id" @click.native="changeUrl(index)" class="v-detail-items v-playlist-items">
+              <md-list-item v-for="(item, index) in this.$store.state.songList" :key="item.id" @click.native="changeUrl(index)" class="v-detail-items v-playlist-items" :class="{'v-playlist-playing': songIsPlaying(index)}">
                 <md-ink-ripple />
-                <md-icon class="v-detail-icon">play_arrow</md-icon>
+                <md-icon class="v-detail-icon">{{playStatus}}</md-icon>
                 <div><span style="color: #e9382a;font-weight: 500;">{{item.name}}</span> / {{item.arname}}</div>
                 <div>{{item.duration}}</div>
                 <md-divider class="md-inset"></md-divider>
@@ -117,7 +117,8 @@ export default {
         tooltipStyle: {
           'background-color': '#e9382a'
         }
-      }
+      },
+      playStatus: 'play_arrow'
     };
   },
   methods: {
@@ -194,6 +195,13 @@ export default {
     },
     clearList: function () {
       this.$store.commit('clearList');
+    },
+    songIsPlaying: function (index) {
+      if (this.$store.state.playIndex === index) {
+        // this.playStatus = 'volume_up';
+        return true;
+      }
+      return false;
     },
     changeUrl: function (index) {
       this.axios.get('http://maxutian.cn:3000/music/url?id=' + this.$store.state.songList[index].id).then(res => {
