@@ -21,14 +21,14 @@
     <!-- 进度条&&时间 -->
 
     <div id="progress">
-      <vue-slider v-bind="duration" style="margin-left: 20px;" v-model="progress"></vue-slider>
+      <vue-slider v-bind="duration" style="margin-left: 1%;" v-model="progress"></vue-slider>
     </div>
     <div id="time">
       <span>{{current}}</span>
       <span>/</span>
       <span>{{end}}</span>
     </div>
-    <button @click="volumeControl" class="v-player-voice" style="margin-left: 1%;">
+    <button @click="volumeControl" class="v-player-voice" style="margin-left: 10px !important;">
       <i class="material-icons" id="voice">{{viconText}}</i>
     </button>
     <div id="volume-duration">
@@ -38,7 +38,6 @@
     <!-- playlist -->
 
     <div ref="listbody">
-
       <button class="v-playlist-button" @click="showList()">
         <i class="material-icons" style="font-size: 2.5em;margin-left: 5px;margin-top: 3px;">
           playlist_play
@@ -215,8 +214,6 @@ export default {
         this.$store.state.showList = false;
       }
     });
-  },
-  computed: {
   },
   watch: {
     progress: function (newValue, oldValue) {

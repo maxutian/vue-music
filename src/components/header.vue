@@ -13,7 +13,7 @@
         <md-tooltip md-direction="bottom">搜索歌曲</md-tooltip>
       </md-button>
       <span style="flex: 1"></span>
-      <md-button class="md-icon-button">
+      <md-button class="md-icon-button" @click.native="toBlog()">
         <md-icon>home</md-icon>
         <md-tooltip md-direction="left">返回博客主页</md-tooltip>
       </md-button>
@@ -28,6 +28,9 @@ export default {
   methods: {
     test: function () {
       this.$store.commit('listActive');
+    },
+    toBlog: function () {
+      window.open('http://maxutian.cn');
     }
   }
 };
