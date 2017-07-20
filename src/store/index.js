@@ -20,6 +20,15 @@ export default new Vuex.Store({
     }]
   },
   mutations: {
+    listActive: state => {
+      state.tabbarIndex = 0;
+    },
+    singerActive: state => {
+      state.tabbarIndex = 1;
+    },
+    rankActive: state => {
+      state.tabbarIndex = 2;
+    },
     playMusic: state => {
       state.isPlaying = true;
       state.iconText = 'pause_circle_outline';
@@ -29,15 +38,6 @@ export default new Vuex.Store({
       state.isPlaying = false;
       state.iconText = 'play_circle_outline';
       state.playText = '播放';
-    },
-    listActive: state => {
-      state.tabbarIndex = 0;
-    },
-    singerActive: state => {
-      state.tabbarIndex = 1;
-    },
-    rankActive: state => {
-      state.tabbarIndex = 2;
     },
     addSong: (state, obj) => {
       for (let item in state.songList) {

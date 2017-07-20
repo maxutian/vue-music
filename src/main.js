@@ -4,6 +4,7 @@ import Vue from 'vue';
 import App from './App';
 import router from './router';
 import store from './store';
+import utils from './utils';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 import VueMaterial from 'vue-material';
@@ -19,6 +20,7 @@ Vue.config.productionTip = false;
 Vue.use(VueMaterial);
 Vue.use(VueAxios, axios);
 Vue.use(VueProgressiveImage);
+Vue.use(utils);
 
 // use&config VueMaterial
 Vue.material.registerTheme({

@@ -68,11 +68,8 @@
         for (let item in this.details) {
           this.$store.commit('pushSong', this.details[item]);
         }
-        this.axios.get('http://maxutian.cn:3000/music/url?id=' + this.$store.state.songList[0].id).then(res => {
-          this.$store.state.mp3Url = res.data.data[0].url;
-          this.$store.state.playIndex = 0;
-          this.$store.commit('playMusic');
-        });
+        this.changeSong(0);
+        this.$store.commit('playMusic');
       },
       showContent: function () {
         this.isloading = false;
@@ -81,22 +78,16 @@
         this.$store.commit('playMusic');
       },
       changeUrl: function (index) {
-        this.axios.get('http://maxutian.cn:3000/music/url?id=' + this.details[index].id).then(res => {
-          if (res.data.data[0].url === null) {
-            alert('Sorry,该音乐暂时无法播放');
+        for (let item in this.$store.state.songList) {
+          if (this.$store.state.songList[item].id === this.details[index].id) {
+            this.changeSong(parseInt(item));
+            this.$store.commit('playMusic');
             return;
           }
-          for (let item in this.$store.state.songList) {
-            if (this.$store.state.songList[item].id === this.details[index].id) {
-              this.$store.state.playIndex = parseInt(item);
-              this.$store.state.mp3Url = res.data.data[0].url;
-              return;
-            }
-          }
-          this.$store.commit('addSong', this.details[index]);
-          this.$store.state.mp3Url = res.data.data[0].url;
-          this.$store.state.playIndex = 0;
-        });
+        }
+        this.$store.commit('addSong', this.details[index]);
+        this.changeSong(0);
+        this.$store.commit('playMusic');
       }
     },
     mounted () {
