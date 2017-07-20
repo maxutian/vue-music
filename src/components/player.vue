@@ -152,11 +152,21 @@ export default {
       if (this.$store.state.playIndex === this.$store.state.songList.length - 1) {
         this.$store.state.playIndex = 0;
         this.axios.get('http://maxutian.cn:3000/music/url?id=' + this.$store.state.songList[0].id).then(res => {
+          if (res.data.data[0].url === null) {
+            alert('Sorry,该音乐暂时无法播放');
+            this.changeUrl(++this.$store.state.playIndex);
+            return;
+          }
           this.$store.state.mp3Url = res.data.data[0].url;
           this.$store.state.playIndex = 0;
         });
       } else {
         this.axios.get('http://maxutian.cn:3000/music/url?id=' + this.$store.state.songList[this.$store.state.playIndex + 1].id).then(res => {
+          if (res.data.data[0].url === null) {
+            alert('Sorry,该音乐暂时无法播放');
+            this.changeUrl(++this.$store.state.playIndex);
+            return;
+          }
           this.$store.state.playIndex++;
           this.$store.state.mp3Url = res.data.data[0].url;
         });
@@ -166,11 +176,19 @@ export default {
       if (this.$store.state.playIndex === 0) {
         this.$store.state.playIndex = this.$store.state.songList.length - 1;
         this.axios.get('http://maxutian.cn:3000/music/url?id=' + this.$store.state.songList[this.$store.state.songList.length - 1].id).then(res => {
+          if (res.data.data[0].url === null) {
+            alert('Sorry,该音乐暂时无法播放');
+            return;
+          }
           this.$store.state.playIndex = this.$store.state.songList.length - 1;
           this.$store.state.mp3Url = res.data.data[0].url;
         });
       } else {
         this.axios.get('http://maxutian.cn:3000/music/url?id=' + this.$store.state.songList[this.$store.state.playIndex - 1].id).then(res => {
+          if (res.data.data[0].url === null) {
+            alert('Sorry,该音乐暂时无法播放');
+            return;
+          }
           this.$store.state.playIndex--;
           this.$store.state.mp3Url = res.data.data[0].url;
         });
@@ -205,6 +223,10 @@ export default {
     },
     changeUrl: function (index) {
       this.axios.get('http://maxutian.cn:3000/music/url?id=' + this.$store.state.songList[index].id).then(res => {
+        if (res.data.data[0].url === null) {
+          alert('Sorry,该音乐暂时无法播放');
+          return;
+        }
         this.$store.state.mp3Url = res.data.data[0].url;
         this.$store.state.playIndex = index;
         this.$store.commit('playMusic');
