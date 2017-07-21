@@ -74,19 +74,4 @@ export default {
     margin-bottom: 3%;
     margin-right: 3%;
   }
-  @media(max-width: 1500px){
-    #v-songlists-body{
-      width: 60%;
-    }
-  }
-  @media(max-width: 1200px){
-    #v-songlists-body{
-      width: 70%;
-    }
-    .v-songlist-ele{
-      width: 45%;
-      margin-bottom: 5%;
-      margin-right: 5%;
-    }
-  }
 </style>

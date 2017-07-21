@@ -18,7 +18,7 @@
       </button>
     </div>
 
-    <!-- 进度条&&时间 -->
+    <!-- 进度条&&时间&&音量 -->
 
     <div id="progress">
       <vue-slider v-bind="duration" style="margin-left: 1%;" v-model="progress"></vue-slider>
@@ -35,60 +35,21 @@
       <vue-slider v-bind="volumeProgress" v-model="volume"></vue-slider>
     </div>
 
-    <!-- playlist -->
-
-    <div ref="listbody">
-      <button class="v-playlist-button" @click="showList()">
-        <i class="material-icons" style="font-size: 2.5em;margin-left: 5px;margin-top: 3px;">
-          playlist_play
-        </i>
-      </button>
-
-      <div class="v-playlist-body">
-        <transition name="showlist">
-
-          <div id="v-playlist" v-if="(this.$store.state.showList)">
-
-            <div class="v-playlist-tabbar">
-              <button class="v-playlist-clear" style="margin-left: 2.5%;" @click="clearList()">
-                <i class="material-icons" style="font-size: 1.8em;">delete_sweep</i>
-              </button>
-              <div class="v-playlist-title">
-                <span style="font-weight: 700">播放列表</span>
-              </div>
-              <button class="v-playlist-close" style="margin-right: 5px;" @click="showList()">
-                <i class="material-icons" style="font-size: 1em;margin-top: 3px;">close</i>
-              </button>
-            </div>
-            
-            <div style="width:100%; height: 15px;"></div>
-
-            <div style="margin-top: 40px;">
-              <md-list-item v-for="(item, index) in this.$store.state.songList" :key="item.id" @click.native="changeUrl(index)" class="v-detail-items v-playlist-items" :class="{'v-playlist-playing': songIsPlaying(index)}">
-                <md-ink-ripple />
-                <md-icon class="v-detail-icon">{{playStatus}}</md-icon>
-                <div><span style="color: #e9382a;font-weight: 500;">{{item.name}}</span> / {{item.arname}}</div>
-                <div>{{item.duration}}</div>
-                <md-divider class="md-inset"></md-divider>
-              </md-list-item>
-            </div>
-          </div>
-
-        </transition>
-      </div>
-    </div>
+    <playlist></playlist>
 
   </div>
 </template>
 
 <script>
-import vueSlider from 'vue-slider-component';
 import Vue from 'vue';
+import vueSlider from 'vue-slider-component';
+import playlist from './playlist/playlist';
 
 export default {
   name: 'player',
   components: {
-    vueSlider
+    vueSlider,
+    'playlist': playlist
   },
   data () {
     return {
@@ -198,27 +159,7 @@ export default {
     }
   },
   mounted: function () {
-    this.axios.get('http://maxutian.cn:3000/music/url?id=' + this.$store.state.songList[0].id).then(res => {
-      this.$store.state.mp3Url = res.data.data[0].url;
-    });
-    document.addEventListener('click', (e) => {
-      if (this.$store.state.showList && this.$refs.listbody.contains(e.target)) {
-        return;
-      } else {
-        this.$store.state.showList = false;
-      }
-    });
-  },
-  watch: {
-    progress: function (newValue, oldValue) {
-      if (Math.abs(newValue - oldValue) > 1) {
-        this.current = Vue.options.filters.timeToStr(newValue);
-        this.$refs.player.currentTime = newValue;
-      }
-    },
-    volume: function (newValue) {
-      this.$refs.player.volume = newValue / 100;
-    }
+    this.changeSong(0);
   }
 };
 </script>

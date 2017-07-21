@@ -78,7 +78,9 @@
         this.$store.commit('addSong', this.details[index]);
         if (this.$store.state.isRepeating) {
           this.changeSong(index);
+          this.$store.commit('playMusic');
           this.$store.state.isRepeating = false;
+          return;
         }
         this.changeSong(0);
         this.$store.commit('playMusic');

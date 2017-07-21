@@ -1,0 +1,15 @@
+@media(max-width: 1400px){
+  #v-songlists-body,#v-singerlists-body{
+    width: 60%;
+  }
+}
+@media(max-width: 1200px){
+  #v-songlists-body,#v-singerlists-body{
+    width: 70%;
+  }
+  .v-songlist-ele,.v-singerlist-ele{
+    width: 45%;
+    margin-bottom: 5%;
+    margin-right: 5%;
+  }
+}

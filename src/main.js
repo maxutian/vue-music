@@ -10,9 +10,11 @@ import VueAxios from 'vue-axios';
 import VueMaterial from 'vue-material';
 import VueProgressiveImage from 'vue-progressive-image';
 import './filters';
+import './style/style.css';
 import './style/detail.css';
 import './style/animation.css';
 import './style/player.css';
+import './style/playlist.css';
 import 'vue-material/dist/vue-material.css';
 
 Vue.config.productionTip = false;
