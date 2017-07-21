@@ -12,11 +12,12 @@ export default new Vuex.Store({
     tabbarIndex: 0,
     mp3Url: '',
     playIndex: 0,
+    isRepeating: false,
     songList: [{
-      name: 'The Beautiful People',
-      id: '21256392',
-      duration: '03:38',
-      arname: 'Marilyn Manson'
+      name: 'Seven Nation Army',
+      id: '26933374',
+      duration: '02:58',
+      arname: "Ben l'oncle Soul"
     }]
   },
   mutations: {
@@ -42,7 +43,7 @@ export default new Vuex.Store({
     addSong: (state, obj) => {
       for (let item in state.songList) {
         if (state.songList[item].id === obj.id) {
-          state.songList.splice(item, 1, obj);
+          state.isRepeating = true;
           return;
         }
       }

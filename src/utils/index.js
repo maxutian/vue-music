@@ -4,6 +4,7 @@ export default{
       this.axios.get('http://maxutian.cn:3000/music/url?id=' + this.$store.state.songList[index].id).then(res => {
         if (res.data.data[0].url === null) {
           alert('Sorry,该音乐暂时无法播放');
+          this.changeSong(index + 1);
           return;
         }
         this.$store.state.mp3Url = res.data.data[0].url;

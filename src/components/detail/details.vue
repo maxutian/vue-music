@@ -36,7 +36,7 @@
       <template>
         <md-list-item v-for="(item, index) in details" :key="item.id" 
                       class="v-detail-items" 
-                      @click.native="changeIcon(), changeUrl(index)">
+                      @click.native="changeUrl(index)">
           <md-ink-ripple />
           <md-icon class="v-detail-icon">play_arrow</md-icon>
           <div><span style="color: #e9382a;font-weight: 500;">{{item.name}}</span> / {{item.arname}}</div>
@@ -74,18 +74,12 @@
       showContent: function () {
         this.isloading = false;
       },
-      changeIcon: function () {
-        this.$store.commit('playMusic');
-      },
       changeUrl: function (index) {
-        for (let item in this.$store.state.songList) {
-          if (this.$store.state.songList[item].id === this.details[index].id) {
-            this.changeSong(parseInt(item));
-            this.$store.commit('playMusic');
-            return;
-          }
-        }
         this.$store.commit('addSong', this.details[index]);
+        if (this.$store.state.isRepeating) {
+          this.changeSong(index);
+          this.$store.state.isRepeating = false;
+        }
         this.changeSong(0);
         this.$store.commit('playMusic');
       }
