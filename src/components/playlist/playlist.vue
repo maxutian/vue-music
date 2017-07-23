@@ -42,8 +42,6 @@
 </template>
 
 <script>
-import Vue from 'vue';
-
 export default {
   name: 'playlist',
   data () {
@@ -77,17 +75,6 @@ export default {
         this.$store.state.showList = false;
       }
     });
-  },
-  watch: {
-    progress: function (newValue, oldValue) {
-      if (Math.abs(newValue - oldValue) > 1) {
-        this.current = Vue.options.filters.timeToStr(newValue);
-        this.$refs.player.currentTime = newValue;
-      }
-    },
-    volume: function (newValue) {
-      this.$refs.player.volume = newValue / 100;
-    }
   }
 };
 </script>

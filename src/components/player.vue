@@ -111,8 +111,8 @@ export default {
     },
     nextSong: function () {
       if (this.$store.state.playIndex === this.$store.state.songList.length - 1) {
-        this.$store.state.playIndex = 0;
         this.changeUrl(0);
+        this.$store.state.playIndex = 0;
       } else {
         this.changeUrl(this.$store.state.playIndex + 1);
       }
@@ -120,8 +120,8 @@ export default {
     },
     preSong: function () {
       if (this.$store.state.playIndex === 0) {
-        this.$store.state.playIndex = this.$store.state.songList.length - 1;
         this.changeUrl(this.$store.state.songList.length - 1);
+        this.$store.state.playIndex = this.$store.state.songList.length - 1;
       } else {
         this.changeUrl(this.$store.state.playIndex - 1);
       }
@@ -147,12 +147,6 @@ export default {
     clearList: function () {
       this.$store.commit('clearList');
     },
-    songIsPlaying: function (index) {
-      if (this.$store.state.playIndex === index) {
-        return true;
-      }
-      return false;
-    },
     changeSong: function (index) {
       this.changeUrl(index);
       this.$store.commit('playMusic');
@@ -160,6 +154,17 @@ export default {
   },
   mounted: function () {
     this.changeUrl(0);
+  },
+  watch: {
+    progress: function (newValue, oldValue) {
+      if (Math.abs(newValue - oldValue) > 1) {
+        this.current = Vue.options.filters.timeToStr(newValue);
+        this.$refs.player.currentTime = newValue;
+      }
+    },
+    volume: function (newValue) {
+      this.$refs.player.volume = newValue / 100;
+    }
   }
 };
 </script>
