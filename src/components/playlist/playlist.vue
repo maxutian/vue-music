@@ -25,7 +25,7 @@
           <div style="width:100%; height: 15px;"></div>
 
           <div style="margin-top: 37px;">
-            <md-list-item v-for="(item, index) in this.$store.state.songList" :key="item.id" @click.native="changeUrl(index)" class="v-detail-items v-playlist-items" :class="{'v-playlist-playing': songIsPlaying(index)}">
+            <md-list-item v-for="(item, index) in this.$store.state.songList" :key="item.id" @click.native="changeSong(index)" class="v-detail-items v-playlist-items" :class="{'v-playlist-playing': songIsPlaying(index)}">
               <md-ink-ripple />
               <md-icon class="v-detail-icon">{{playStatus}}</md-icon>
               <div><span style="color: #e9382a;font-weight: 500;">{{item.name}}</span> / {{item.arname}}</div>
@@ -64,8 +64,8 @@ export default {
       }
       return false;
     },
-    changeUrl: function (index) {
-      this.changeSong(index);
+    changeSong: function (index) {
+      this.changeUrl(index);
       this.$store.commit('playMusic');
     }
   },

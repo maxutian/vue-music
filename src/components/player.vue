@@ -112,18 +112,18 @@ export default {
     nextSong: function () {
       if (this.$store.state.playIndex === this.$store.state.songList.length - 1) {
         this.$store.state.playIndex = 0;
-        this.changeSong(0);
+        this.changeUrl(0);
       } else {
-        this.changeSong(this.$store.state.playIndex + 1);
+        this.changeUrl(this.$store.state.playIndex + 1);
       }
       this.$store.commit('playMusic');
     },
     preSong: function () {
       if (this.$store.state.playIndex === 0) {
         this.$store.state.playIndex = this.$store.state.songList.length - 1;
-        this.changeSong(this.$store.state.songList.length - 1);
+        this.changeUrl(this.$store.state.songList.length - 1);
       } else {
-        this.changeSong(this.$store.state.playIndex - 1);
+        this.changeUrl(this.$store.state.playIndex - 1);
       }
       this.$store.commit('playMusic');
     },
@@ -153,13 +153,13 @@ export default {
       }
       return false;
     },
-    changeUrl: function (index) {
-      this.changeSong(index);
+    changeSong: function (index) {
+      this.changeUrl(index);
       this.$store.commit('playMusic');
     }
   },
   mounted: function () {
-    this.changeSong(0);
+    this.changeUrl(0);
   }
 };
 </script>

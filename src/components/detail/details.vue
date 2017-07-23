@@ -36,7 +36,7 @@
       <template>
         <md-list-item v-for="(item, index) in details" :key="item.id" 
                       class="v-detail-items" 
-                      @click.native="changeUrl(index)">
+                      @click.native="changeSong(index)">
           <md-ink-ripple />
           <md-icon class="v-detail-icon">play_arrow</md-icon>
           <div><span style="color: #e9382a;font-weight: 500;">{{item.name}}</span> / {{item.arname}}</div>
@@ -68,21 +68,21 @@
         for (let item in this.details) {
           this.$store.commit('pushSong', this.details[item]);
         }
-        this.changeSong(0);
+        this.changeUrl(0);
         this.$store.commit('playMusic');
       },
       showContent: function () {
         this.isloading = false;
       },
-      changeUrl: function (index) {
+      changeSong: function (index) {
         this.$store.commit('addSong', this.details[index]);
         if (this.$store.state.isRepeating) {
-          this.changeSong(index);
+          this.changeUrl(index);
           this.$store.commit('playMusic');
-          this.$store.state.isRepeating = false;
+          this.$store.commit('changeRepeatValue');
           return;
         }
-        this.changeSong(0);
+        this.changeUrl(0);
         this.$store.commit('playMusic');
       }
     },
