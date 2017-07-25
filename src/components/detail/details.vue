@@ -99,6 +99,7 @@
               name: item.name,
               id: item.id,
               arname: item.ar[0].name,
+              icon: 'play_arrow',
               duration: Vue.options.filters.timeToStr(item.dt / 1000)
             };
             this.details.push(obj);
@@ -115,6 +116,7 @@
               name: item.name,
               id: item.id,
               arname: res.data.artist.name,
+              icon: 'play_arrow',
               duration: Vue.options.filters.timeToStr(item.dt / 1000)
             };
             this.details.push(obj);
@@ -131,6 +133,7 @@
               name: item.name,
               id: item.id,
               arname: item.artists[0].name,
+              icon: 'play_arrow',
               duration: Vue.options.filters.timeToStr(item.duration / 1000)
             };
             this.details.push(obj);
