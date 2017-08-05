@@ -14,6 +14,18 @@ export default new Vuex.Store({
     playIndex: 0,
     isRepeating: false,
     songList: [{
+      name: 'Adieu',
+      id: '16148503',
+      duration: '03:43',
+      arname: '17 Hippies'
+    },
+    {
+      name: 'Mes mots tes lèvres douces',
+      id: '30841948',
+      duration: '03:02',
+      arname: 'Laurie Darmon'
+    },
+    {
       name: 'Seven Nation Army',
       id: '26933374',
       duration: '02:58',
