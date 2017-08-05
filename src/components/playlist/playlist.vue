@@ -25,9 +25,9 @@
           <div style="width:100%; height: 15px;"></div>
 
           <div style="margin-top: 37px;">
-            <md-list-item v-for="(item, index) in this.$store.state.songList" :key="item.id" @click.native="changeUrl(index)" class="v-detail-items v-playlist-items" :class="{'v-playlist-playing': songIsPlaying(index)}">
+            <md-list-item v-for="(item, index) in this.$store.state.songList" :key="item.id" @click.native="changeSong(index)" class="v-detail-items v-playlist-items" :class="{'v-playlist-playing': songIsPlaying(index)}">
               <md-ink-ripple />
-              <md-icon class="v-detail-icon">{{playStatus}}</md-icon>
+              <md-icon class="v-detail-icon">play_arrow</md-icon>
               <div><span style="color: #e9382a;font-weight: 500;">{{item.name}}</span> / {{item.arname}}</div>
               <div>{{item.duration}}</div>
               <md-divider class="md-inset"></md-divider>
@@ -42,13 +42,10 @@
 </template>
 
 <script>
-import Vue from 'vue';
-
 export default {
   name: 'playlist',
   data () {
     return {
-      playStatus: 'play_arrow'
     };
   },
   methods: {
@@ -60,12 +57,13 @@ export default {
     },
     songIsPlaying: function (index) {
       if (this.$store.state.playIndex === index) {
+        this.$store.state.songList[index].icon = 'volume_up';
         return true;
       }
       return false;
     },
-    changeUrl: function (index) {
-      this.changeSong(index);
+    changeSong: function (index) {
+      this.changeUrl(index);
       this.$store.commit('playMusic');
     }
   },
@@ -77,17 +75,6 @@ export default {
         this.$store.state.showList = false;
       }
     });
-  },
-  watch: {
-    progress: function (newValue, oldValue) {
-      if (Math.abs(newValue - oldValue) > 1) {
-        this.current = Vue.options.filters.timeToStr(newValue);
-        this.$refs.player.currentTime = newValue;
-      }
-    },
-    volume: function (newValue) {
-      this.$refs.player.volume = newValue / 100;
-    }
   }
 };
 </script>

@@ -58,7 +58,7 @@ export default {
     width: 50%;
     margin: 0 auto;
     margin-top: 150px;
-    margin-bottom: 90px;
+    margin-bottom: 60px;
     padding-left: 2%;
   }
   #v-songlist-hover{

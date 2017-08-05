@@ -66,6 +66,9 @@ export default new Vuex.Store({
     },
     clearList: state => {
       state.songList = [];
+    },
+    changeRepeatValue: state => {
+      state.isRepeating = !state.isRepeating;
     }
   },
   actions: {
