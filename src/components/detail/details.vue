@@ -1,14 +1,8 @@
 <template>
   <div class="details-container">
-    <transition name="loadAnimation">
-      <div class="animation-container" v-if="isloading">
-        <div class="dots-container">
-          <div class="dot1"></div>
-          <div class="dot2"></div>
-          <div class="dot3"></div>
-        </div>
-      </div>
-    </transition>
+
+    <loadAnimation v-if="isloading"></loadAnimation>
+      
     <div class="v-songdetail-header">
       <div>
         <img :src="avatarUrl" class="v-detail-avatarUrl">
@@ -49,10 +43,14 @@
 </template>
 
 <script>
-  import Vue from 'vue';
+  import Vue from 'vue'
+  import loadAnimation from '../animation'
 
   export default {
     name: 'details',
+    components: {
+      'loadAnimation': loadAnimation
+    },
     data () {
       return {
         details: [],
@@ -60,40 +58,40 @@
         nickname: '',
         signature: '',
         isloading: true
-      };
+      }
     },
     methods: {
       playAll: function () {
-        this.$store.commit('clearList');
+        this.$store.commit('clearList')
         for (let item in this.details) {
-          this.$store.commit('pushSong', this.details[item]);
+          this.$store.commit('pushSong', this.details[item])
         }
-        this.changeUrl(0);
-        this.$store.commit('playMusic');
+        this.changeUrl(0)
+        this.$store.commit('playMusic')
       },
       showContent: function () {
-        this.isloading = false;
+        this.isloading = false
       },
       changeSong: function (index) {
-        this.$store.commit('addSong', this.details[index]);
+        this.$store.commit('addSong', this.details[index])
         if (this.$store.state.isRepeating) {
-          this.changeUrl(index);
-          this.$store.commit('playMusic');
-          this.$store.commit('changeRepeatValue');
-          return;
+          this.changeUrl(index)
+          this.$store.commit('playMusic')
+          this.$store.commit('changeRepeatValue')
+          return false
         }
-        this.changeUrl(0);
-        this.$store.commit('playMusic');
+        this.changeUrl(0)
+        this.$store.commit('playMusic')
       }
     },
     mounted () {
-      this.details = [];
+      this.details = []
       if (this.$route.params.id === 0) {
-        setTimeout(this.showContent, 2000);
+        setTimeout(this.showContent, 2000)
         this.axios.get('http://maxutian.cn:3000/playlist/detail?id=' + this.$route.query.id).then(res => {
-          this.avatarUrl = res.data.playlist.creator.avatarUrl;
-          this.nickname = res.data.playlist.creator.nickname;
-          this.signature = res.data.playlist.creator.signature;
+          this.avatarUrl = res.data.playlist.creator.avatarUrl
+          this.nickname = res.data.playlist.creator.nickname
+          this.signature = res.data.playlist.creator.signature
           res.data.playlist.tracks.forEach(item => {
             let obj = {
               name: item.name,
@@ -101,16 +99,16 @@
               arname: item.ar[0].name,
               icon: 'play_arrow',
               duration: Vue.options.filters.timeToStr(item.dt / 1000)
-            };
-            this.details.push(obj);
-          });
-        });
+            }
+            this.details.push(obj)
+          })
+        })
       } else if (this.$route.params.id === 1) {
-        setTimeout(this.showContent, 1000);
+        setTimeout(this.showContent, 1000)
         this.axios.get('http://maxutian.cn:3000/artists?id=' + this.$route.query.id).then(res => {
-          this.avatarUrl = res.data.artist.picUrl;
-          this.nickname = res.data.artist.name;
-          this.signature = res.data.artist.alias[0];
+          this.avatarUrl = res.data.artist.picUrl
+          this.nickname = res.data.artist.name
+          this.signature = res.data.artist.alias[0]
           res.data.hotSongs.forEach(item => {
             let obj = {
               name: item.name,
@@ -118,16 +116,16 @@
               arname: res.data.artist.name,
               icon: 'play_arrow',
               duration: Vue.options.filters.timeToStr(item.dt / 1000)
-            };
-            this.details.push(obj);
-          });
-        });
+            }
+            this.details.push(obj)
+          })
+        })
       } else if (this.$route.params.id === 2) {
-        setTimeout(this.showContent, 1000);
+        setTimeout(this.showContent, 1000)
         this.axios.get('http://maxutian.cn:3000/top/list?idx=6').then(res => {
-          this.avatarUrl = res.data.result.creator.avatarUrl;
-          this.nickname = res.data.result.creator.nickname;
-          this.signature = res.data.result.creator.signature;
+          this.avatarUrl = res.data.result.creator.avatarUrl
+          this.nickname = res.data.result.creator.nickname
+          this.signature = res.data.result.creator.signature
           res.data.result.tracks.forEach(item => {
             let obj = {
               name: item.name,
@@ -135,18 +133,20 @@
               arname: item.artists[0].name,
               icon: 'play_arrow',
               duration: Vue.options.filters.timeToStr(item.duration / 1000)
-            };
-            this.details.push(obj);
-          });
-        });
+            }
+            this.details.push(obj)
+          })
+        })
       } else {
-        return;
+        return
       }
     }
-  };
+  }
 </script>
 
 <style scoped>
+  @import url('../../style/detail.css');
+
   .v-songdetail-header{
     z-index: 1;
     position: relative;

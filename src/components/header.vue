@@ -3,7 +3,7 @@
     <md-toolbar>
 
       <h2 class="md-title header-title" 
-          @click="$router.push('/'),test()" 
+          @click="changeTab()" 
           style="cursor: pointer">Vue Music</h2>
       <md-input-container md-inline id="v-header-inputContainer">
         <md-input placeholder="输入歌曲名以搜索" id="v-header-input"></md-input>
@@ -26,14 +26,15 @@
 <script>
 export default {
   methods: {
-    test: function () {
-      this.$store.commit('listActive');
+    changeTab: function () {
+      this.$store.commit('listActive')
+      this.$router.push('/')
     },
     toBlog: function () {
-      window.open('http://maxutian.cn');
+      window.open('http://maxutian.cn')
     }
   }
-};
+}
 </script>
 
 <style>

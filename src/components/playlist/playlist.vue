@@ -46,39 +46,39 @@ export default {
   name: 'playlist',
   data () {
     return {
-    };
+    }
   },
   methods: {
     showList: function () {
-      this.$store.state.showList = !this.$store.state.showList;
+      this.$store.state.showList = !this.$store.state.showList
     },
     clearList: function () {
-      this.$store.commit('clearList');
+      this.$store.commit('clearList')
     },
     songIsPlaying: function (index) {
       if (this.$store.state.playIndex === index) {
-        this.$store.state.songList[index].icon = 'volume_up';
-        return true;
+        this.$store.state.songList[index].icon = 'volume_up'
+        return true
       }
-      return false;
+      return false
     },
     changeSong: function (index) {
-      this.changeUrl(index);
-      this.$store.commit('playMusic');
+      this.changeUrl(index)
+      this.$store.commit('playMusic')
     }
   },
   mounted: function () {
     document.addEventListener('click', (e) => {
       if (this.$store.state.showList && this.$refs.listbody.contains(e.target)) {
-        return;
+        return
       } else {
-        this.$store.state.showList = false;
+        this.$store.state.showList = false
       }
-    });
+    })
   }
-};
+}
 </script>
 
-<style>
-
+<style scoped>
+  @import url('../../style/playlist.css');
 </style>

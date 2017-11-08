@@ -1,8 +1,8 @@
 <template>
   <div id="v-ranks-body">
-    <md-card id="v-rank-hover" class="v-rank-ele" @click.native="$router.push({name: 'details', query: {id: 'billborad'}, params: {id: 2}})">
+    <md-card id="v-rank-hover" class="v-rank-ele" @click.native="goToDetail()">
       <md-card-media-cover md-solid>
-        <progressive-img src="https://www.tuchuang001.com/images/2017/06/10/billboard-logo.jpg" style="cursor: pointer"/>
+        <progressive-img src="../../../static/billboard-logo.jpg" alt="billboard-logo.jpg" style="cursor: pointer"/>
         <md-card-area>
           <md-card-header>
             <div class="md-title">Billborad公告牌</div>
@@ -14,7 +14,17 @@
 </template>
 
 <script>
-
+  export default {
+    data () {
+      return {
+      }
+    },
+    methods: {
+      goToDetail: function () {
+        this.$router.push({name: 'details', query: {id: 'billborad'}, params: {id: 2}})
+      }
+    }
+  }
 </script>
 
 <style>

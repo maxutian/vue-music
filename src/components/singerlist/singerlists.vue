@@ -2,11 +2,11 @@
   <div id="v-singerlists-body">
     <template v-for="item in singerlists">
       <md-card id="v-singerlist-hover" class="v-singerlist-ele" >
-        <md-card-media-cover md-solid @click.native="$router.push({name: 'details', query: {id: item.id}, params: {id: 1}})">
+        <md-card-media-cover md-solid @click.native="goToDetail(item)">
           <progressive-img :src="item.imgUrl" style="cursor: pointer"/>
           <md-card-area>
             <md-card-header>
-              <div class="md-title"><span @click="$router.push({name: 'details', query: {id: item.id}, params: {id: 1}})" style="cursor: pointer;">{{item.name}}</span></div>
+              <div class="md-title"><span @click="goToDetail(item)" style="cursor: pointer;">{{item.name}}</span></div>
             </md-card-header>
           </md-card-area>
         </md-card-media-cover>
@@ -21,22 +21,27 @@
     data () {
       return {
         singerlists: []
-      };
+      }
     },
-    mounted () {
-      this.singerlists = [];
+    methods: {
+      gotoDetail: function (item) {
+        this.$router.push({name: 'details', query: {id: item.id}, params: {id: 1}})
+      }
+    },
+    created () {
+      this.singerlists = []
       this.axios.get('http://maxutian.cn:3000/top/artists?limit=9').then(res => {
         res.data.artists.forEach(item => {
           let obj = {
             name: item.name,
             id: item.id,
             imgUrl: item.img1v1Url
-          };
-          this.singerlists.push(obj);
-        });
-      });
+          }
+          this.singerlists.push(obj)
+        })
+      })
     }
-  };
+  }
 </script>
 
 <style>

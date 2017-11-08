@@ -2,11 +2,11 @@
   <div id="v-songlists-body">
     <template v-for="item in songlists">
       <md-card id="v-songlist-hover" class="v-songlist-ele">
-        <md-card-media-cover md-solid @click.native="$router.push({name: 'details', query: {id: item.id}, params: {id: 0}})">
+        <md-card-media-cover md-solid @click.native="goToDetail(item)">
           <progressive-img :src="item.imgUrl" style="cursor: pointer"/>
           <md-card-area style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;">
             <md-card-header>
-              <span class="songlists-title" @click="$router.push({name: 'details', query: {id: item.id}, params: {id: 0}})" style="cursor: pointer;">{{item.name}}</span>
+              <span class="songlists-title" @click="goToDetail(item)" style="cursor: pointer;">{{item.name}}</span>
               <div class="md-subhead">{{item.playCount}}次播放</div>
             </md-card-header>
           </md-card-area>
@@ -17,17 +17,22 @@
 </template>
 
 <script>
-import Vue from 'vue';
+import Vue from 'vue'
 
 export default {
   name: 'songlists',
   data () {
     return {
       songlists: []
-    };
+    }
   },
-  mounted () {
-    this.songlists = [];
+  methods: {
+    goToDetail: function (item) {
+      this.$router.push({name: 'details', query: {id: item.id}, params: {id: 0}})
+    }
+  },
+  created () {
+    this.songlists = []
     this.axios.get('http://maxutian.cn:3000/top/playlist/highquality?limit=9').then(res => {
       res.data.playlists.forEach(item => {
         let obj = {
@@ -35,14 +40,12 @@ export default {
           id: item.id,
           imgUrl: item.coverImgUrl,
           playCount: Vue.options.filters.playCountFormat(item.playCount)
-        };
-        this.songlists.push(obj);
-      });
-    });
-  },
-  methods: {
+        }
+        this.songlists.push(obj)
+      })
+    })
   }
-};
+}
 </script>
 
 <style>

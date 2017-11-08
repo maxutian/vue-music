@@ -41,9 +41,9 @@
 </template>
 
 <script>
-import Vue from 'vue';
-import vueSlider from 'vue-slider-component';
-import playlist from './playlist/playlist';
+import Vue from 'vue'
+import vueSlider from 'vue-slider-component'
+import playlist from './playlist/playlist'
 
 export default {
   name: 'player',
@@ -80,93 +80,93 @@ export default {
         }
       },
       playStatus: 'play_arrow'
-    };
+    }
   },
   methods: {
     currentTime: function () {
-      const currentTime = this.$refs.player.currentTime;
-      this.current = Vue.options.filters.timeToStr(currentTime);
-      this.progress = Number.parseInt(currentTime, 10);
+      const currentTime = this.$refs.player.currentTime
+      this.current = Vue.options.filters.timeToStr(currentTime)
+      this.progress = Number.parseInt(currentTime, 10)
     },
     musicTime: function () {
-      const duration = this.$refs.player.duration;
-      this.end = Vue.options.filters.timeToStr(duration);
-      this.duration.max = Number.parseInt(duration, 10);
+      const duration = this.$refs.player.duration
+      this.end = Vue.options.filters.timeToStr(duration)
+      this.duration.max = Number.parseInt(duration, 10)
     },
     setInterval: function () {
       if (this.$store.state.songList.length === 0) {
-        return;
+        return
       } else {
-        this.update = setInterval(this.currentTime, 100);
+        this.update = setInterval(this.currentTime, 100)
       }
     },
     playControl: function () {
       if (this.$store.state.isPlaying) {
-        this.$store.commit('pauseMusic');
-        this.$refs.player.pause();
+        this.$store.commit('pauseMusic')
+        this.$refs.player.pause()
       } else {
-        this.$store.commit('playMusic');
-        this.$refs.player.play();
+        this.$store.commit('playMusic')
+        this.$refs.player.play()
       }
     },
     nextSong: function () {
       if (this.$store.state.playIndex === this.$store.state.songList.length - 1) {
-        this.changeUrl(0);
-        this.$store.state.playIndex = 0;
+        this.changeUrl(0)
+        this.$store.state.playIndex = 0
       } else {
-        this.changeUrl(this.$store.state.playIndex + 1);
+        this.changeUrl(this.$store.state.playIndex + 1)
       }
-      this.$store.commit('playMusic');
+      this.$store.commit('playMusic')
     },
     preSong: function () {
       if (this.$store.state.playIndex === 0) {
-        this.changeUrl(this.$store.state.songList.length - 1);
-        this.$store.state.playIndex = this.$store.state.songList.length - 1;
+        this.changeUrl(this.$store.state.songList.length - 1)
+        this.$store.state.playIndex = this.$store.state.songList.length - 1
       } else {
-        this.changeUrl(this.$store.state.playIndex - 1);
+        this.changeUrl(this.$store.state.playIndex - 1)
       }
-      this.$store.commit('playMusic');
+      this.$store.commit('playMusic')
     },
     volumeControl: function () {
       if (this.viconText === 'volume_up') {
-        this.viconText = 'volume_off';
-        this.$refs.player.muted = true;
+        this.viconText = 'volume_off'
+        this.$refs.player.muted = true
       } else {
-        this.viconText = 'volume_up';
-        this.$refs.player.muted = false;
+        this.viconText = 'volume_up'
+        this.$refs.player.muted = false
       }
     },
     ended: function () {
-      clearInterval(this.update);
-      this.progress = 0;
-      this.nextSong();
+      clearInterval(this.update)
+      this.progress = 0
+      this.nextSong()
     },
     showList: function () {
-      this.$store.state.showList = !this.$store.state.showList;
+      this.$store.state.showList = !this.$store.state.showList
     },
     clearList: function () {
-      this.$store.commit('clearList');
+      this.$store.commit('clearList')
     },
     changeSong: function (index) {
-      this.changeUrl(index);
-      this.$store.commit('playMusic');
+      this.changeUrl(index)
+      this.$store.commit('playMusic')
     }
   },
   mounted: function () {
-    this.changeUrl(0);
+    this.changeUrl(0)
   },
   watch: {
     progress: function (newValue, oldValue) {
       if (Math.abs(newValue - oldValue) > 1) {
-        this.current = Vue.options.filters.timeToStr(newValue);
-        this.$refs.player.currentTime = newValue;
+        this.current = Vue.options.filters.timeToStr(newValue)
+        this.$refs.player.currentTime = newValue
       }
     },
     volume: function (newValue) {
-      this.$refs.player.volume = newValue / 100;
+      this.$refs.player.volume = newValue / 100
     }
   }
-};
+}
 </script>
 
 <style>

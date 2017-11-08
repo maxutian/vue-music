@@ -4,14 +4,14 @@
       <i class="material-icons"><md-ink-ripple/>arrow_back</i>
       <md-tooltip md-direction="bottom">返回</md-tooltip>
     </button>
-    <md-button class="v-tab" @click.native="$router.push('/'),listActive()">
-      <div :class="{'v-tabbar-active': this.$store.state.tabbarIndex === 0}">歌单</div>
+    <md-button class="v-tab" @click.native="changeTab('songlists')">
+      <div :class="{'v-tabbar-active': this.$store.state.curTab === 'songlists'}">歌单</div>
     </md-button>
-    <md-button class="v-tab" @click.native="$router.push('singerlists'),singerActive()">
-      <div :class="{'v-tabbar-active': this.$store.state.tabbarIndex === 1}">歌手</div>
+    <md-button class="v-tab" @click.native="changeTab('singerlists')">
+      <div :class="{'v-tabbar-active': this.$store.state.curTab === 'singerlists'}">歌手</div>
     </md-button>
-    <md-button class="v-tab" @click.native="$router.push('ranks'),rankActive()">
-      <div :class="{'v-tabbar-active': this.$store.state.tabbarIndex === 2}">排行榜</div>
+    <md-button class="v-tab" @click.native="changeTab('ranks')">
+      <div :class="{'v-tabbar-active': this.$store.state.curTab === 'ranks'}">排行榜</div>
     </md-button>
   </div>
 </template>
@@ -20,30 +20,25 @@
 export default {
   name: 'tabbar',
   methods: {
-    listActive: function () {
-      this.$store.commit('listActive');
-    },
-    singerActive: function () {
-      this.$store.commit('singerActive');
-    },
-    rankActive: function () {
-      this.$store.commit('rankActive');
+    changeTab: function (tab) {
+      this.$router.push({name: tab})
+      this.$store.commit('switchTab', tab)
     },
     goBack: function () {
-      this.$router.go(-1);
+      this.$router.go(-1)
     }
   }
-};
+}
 </script>
 
-<style>
+<style scoped>
 #v-tabbar{
   z-index: 999;
   display: flex;
   justify-content: center;
   position: fixed;
   left: 0;
-  top: 80px;
+  top: 65px;
   width: 100%;
   height: 48px;
   min-height: 48px;
@@ -64,7 +59,7 @@ export default {
   z-index: 999;
   cursor: pointer;
   position: fixed;
-  top: 85px;
+  top: 70px;
   left: 2%;
   width: 38px;
   height: 38px;
