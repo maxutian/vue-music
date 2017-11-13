@@ -8,21 +8,21 @@
 </template>
 
 <script>
-  import header from './components/header';
-  import tabbar from './components/tabbar';
-  import player from './components/player';
+  import header from './components/header'
+  import tabbar from './components/tabbar'
+  import player from './components/player'
 
   export default {
     data () {
       return {
-      };
+      }
     },
     components: {
       'v-header': header,
       'tabbar': tabbar,
       'player': player
     }
-  };
+  }
 </script>
 
 <style>
