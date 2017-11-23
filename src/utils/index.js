@@ -11,5 +11,9 @@ export default{
         this.$store.state.playIndex = index
       })
     }
+    Vue.prototype.toTop = function () {
+      document.body.scrollTop = 0
+      document.documentElement.scrollTop = 0
+    }
   }
 }

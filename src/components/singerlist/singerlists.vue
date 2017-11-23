@@ -1,9 +1,9 @@
 <template>
   <div id="v-singerlists-body">
     <template v-for="item in singerlists">
-      <md-card id="v-singerlist-hover" class="v-singerlist-ele" >
-        <md-card-media-cover md-solid @click.native="goToDetail(item)">
-          <progressive-img :src="item.imgUrl" style="cursor: pointer"/>
+      <md-card id="v-singerlist-hover" class="v-singerlist-ele" :key="item.id">
+        <img :src="item.imgUrl" @click="goToDetail(item)" style="cursor: pointer"/>
+        <md-card-media-cover md-solid>
           <md-card-area>
             <md-card-header>
               <div class="md-title"><span @click="goToDetail(item)" style="cursor: pointer;">{{item.name}}</span></div>
@@ -24,7 +24,8 @@
       }
     },
     methods: {
-      gotoDetail: function (item) {
+      goToDetail: function (item) {
+        this.toTop()
         this.$router.push({name: 'details', query: {id: item.id}, params: {id: 1}})
       }
     },

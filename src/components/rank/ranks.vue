@@ -21,6 +21,7 @@
     },
     methods: {
       goToDetail: function () {
+        this.toTop()
         this.$router.push({name: 'details', query: {id: 'billborad'}, params: {id: 2}})
       }
     }

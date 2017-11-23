@@ -23,6 +23,7 @@ export default {
     changeTab: function (tab) {
       this.$router.push({name: tab})
       this.$store.commit('switchTab', tab)
+      this.toTop()
     },
     goBack: function () {
       this.$router.go(-1)
@@ -38,7 +39,7 @@ export default {
   justify-content: center;
   position: fixed;
   left: 0;
-  top: 65px;
+  top: 64px;
   width: 100%;
   height: 48px;
   min-height: 48px;
